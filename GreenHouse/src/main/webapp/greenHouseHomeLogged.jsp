@@ -99,14 +99,19 @@ if(sessione != null){
 		<a href="./carrello.jsp">Carrello</a>
 			
 		<a href="./riciclo.jsp">Riciclo</a>
-		
-		<!-- Qui sotto viene utilizzato un metodo per eseguire il logout tramite  il tag <a> dove non viene
-		 fatto riferimento a nessun Url href="#" mentre sull'evento di click della scritta Logout viene invocato il form sottostante tramite l'id
-		 "logoutform" il quale utilizza una richiesta con metodo POST  per richiedere il logut dalla pagina ed invalidare la sessione corrente -->
-		 
-		<a href="#" onclick="document.getElementById('logoutForm').submit();">Logout</a>
-		<form id="logoutForm" action="LogoutServlet" method="post" style="display:none;"></form>
-		
+
+		<%
+		if(username!=null){
+		%> 
+		<a href="LogoutServlet">Logout</a>
+		<%
+		}else{	
+		%>
+		<a href="./login.jsp">Ci conosciamo? Registrati o esegui il login!</a>
+				
+		<%
+		}
+		%>
 	</div>
 </div>
 <!---------------------------- ----------- --------------------------->
@@ -116,7 +121,7 @@ if(sessione != null){
 										
 							
 <h1 align="center">GREEN HOUSE</h1>
-<p>Ciao <%= (username != null) ? username : "Utente" %> .Questa è la breve descrizione del sito/ frase ad effetto </p>
+<p>Ciao  <%= (username!=null) ? username : "User" %>!.Questa è la breve descrizione del sito/ frase ad effetto </p>
 
 <!---------------------------- ----------- --------------------------->
 
