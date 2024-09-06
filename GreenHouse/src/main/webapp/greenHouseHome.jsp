@@ -77,12 +77,19 @@
 
 <%
 
-HttpSession sessione = request.getSession(false); //inizia la pagina con una sessione invalida
-UtenteBean user= null;
-if(sessione != null){
-	user= (UtenteBean) sessione.getAttribute("User");
-	
+HttpSession sessione = request.getSession(true); // Crea una nuova sessione se non esiste
+
+UtenteBean user = (UtenteBean) sessione.getAttribute("User");
+if (user == null) {
+    // Se l'utente non è loggato, impostiamo lo stato come "guest"
+    user=new UtenteBean();
+    user.setNome("Guest");
+    user.setRuolo("Cliente");
+    sessione.setAttribute("User", user);
+    
 }
+
+
 
 %>
 
@@ -97,17 +104,24 @@ if(sessione != null){
 		
 		<h2 class="titolo_logo"> GreenHouse </h2>	
 	
-		<a href="UserListServlet">Chi siamo</a>	
+		<a href="UserListServlet">Chi siamo</a>
+		
+		<a href="ManagerArticoloServlet?action=mostraTutti&pathOrigin=catalogo.jsp">Catalogo</a>	
 		
 		<a href="./carrello.jsp">Carrello</a>
 			
-		<a href="./riciclo.jsp">Riciclo</a>
+		
 		
 		<%
-		if(user!=null){
-		%> 
-		<a href="LogoutServlet">Logout</a>
-		<a href="./Ordini.jsp">Ordini</a>
+		if(!user.getNome().equals("Guest")){
+		%>
+		
+		<a href="./ordini.jsp">Ordini</a>
+		
+		<a href="./riciclo.jsp">Riciclo</a>
+		
+		<a href="ManagerUserServlet?action=logout">Logout</a>
+		
 		<%
 			
 			if(user.getRuolo().compareToIgnoreCase("Admin")==0){				
@@ -118,13 +132,14 @@ if(sessione != null){
 
 		}else{
 			
-			%>
+		%>
 			
 			<a href="./login.jsp">Ci conosciamo? Registrati o esegui il login!</a>
 					
-			<%
-			}
+		<%
+		}
 		%>
+		
 	</div>
 </div>
 <!---------------------------- ----------- --------------------------->

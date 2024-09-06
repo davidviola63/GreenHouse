@@ -50,7 +50,7 @@ if(sessione == null || (user = (UtenteBean) sessione.getAttribute("User")) == nu
 		<% 
         } 
         if(message!=null){ %>
-		<p style="color: red;"><%= message %></p>
+		<p style="color: green;"><%= message %></p>
 		<% 
     }
 		%>
@@ -100,9 +100,10 @@ if(sessione == null || (user = (UtenteBean) sessione.getAttribute("User")) == nu
 		<h1>Mostra tutti gli articoli</h1>
 
 		<form action="ManagerArticoloServlet" method="post">
-
-			<label for="tipologia">Seleziona il tipo di mobile:</label> <select
-				id="tipologia" name="tipologia" required>
+			
+			<input type="hidden" name="pathOrigin" value="panelAdmin.jsp"> 
+			<label for="tipologia">Seleziona il tipo di mobile:</label>
+			<select id="tipologia" name="tipologia" required>
 				<option value="Tavolo">Tavolo</option>
 				<option value="Sedie">Sedie</option>
 				<option value="Divano">Divano</option>
@@ -110,7 +111,7 @@ if(sessione == null || (user = (UtenteBean) sessione.getAttribute("User")) == nu
 				<option value="Mobile generico">Mobile Generico</option>
 			</select><br>
 			<br>
-			<button type="submit" name="action" value="mostra">Visualizza
+			<button type="submit" name="action" value="mostraPerTipologia">Visualizza
 				Articoli</button>
 		</form>
 
@@ -222,11 +223,11 @@ if(sessione == null || (user = (UtenteBean) sessione.getAttribute("User")) == nu
 			<!-- Form per rimuovere l'articolo e aggiungere un bonus -->
 			<form action="RecyclingServlet" method="post">
 
-				<input type="hidden" name="action" value="bonus"> <input
-					type="hidden" name="id" value="<%= mobile.getId() %>"> <input
-					type="hidden" name="emailUtente"
-					value="<%= mobile.getEmailUtente() %>"> <label for="bonus">Assegna
-					un Bonus:</label> <select id="bonus" name="bonus" required>
+				<input type="hidden" name="action" value="bonus"> 
+				<input type="hidden" name="id" value="<%= mobile.getId() %>"> 
+				<input type="hidden" name="emailUtente" value="<%= mobile.getEmailUtente() %>"> 
+				<label for="bonus"> Assegna un Bonus:</label> 
+				<select id="bonus" name="bonus" required>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -414,6 +415,33 @@ if(sessione == null || (user = (UtenteBean) sessione.getAttribute("User")) == nu
 	<div>
 	
 		<h1> Aggiungi bonus</h1>
+		
+	<% 
+        errorMessage = (String) request.getAttribute("errorMessage");
+        message = (String) request.getAttribute("message");    
+        if (errorMessage != null) { 
+    %>
+        <p style="color: red;"><%= errorMessage %></p>
+    <% 
+        } 
+        if (message != null) { 
+    %>
+        <p style="color: green;"><%= message %></p>
+    <% 
+        } 
+    %>
+		
+	<form action="RecyclingServlet" method="post">
+    	<input type="hidden" name="action" value="aggiungiBonus">
+    
+    	<label for="percentuale">Percentuale di Sconto (%):</label>
+    	<input type="number" id="percentuale" name="percentuale" min="1" max="100" required><br><br>
+    
+    	<label for="descrizione">Descrizione del Bonus:</label>
+   	 	<textarea id="descrizione" name="descrizione" maxlength="100" required></textarea><br><br>
+    
+    	<button type="submit">Aggiungi Bonus</button>
+	</form>
 	
 	</div>
 

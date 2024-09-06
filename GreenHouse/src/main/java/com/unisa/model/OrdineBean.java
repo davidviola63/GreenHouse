@@ -14,9 +14,10 @@ public class OrdineBean implements Serializable {
 	private String stato;
 	private LocalDate dataAcquisto;
 	private String codFattura;
+	private double prezzoTotale;
 	
 	public OrdineBean() {
-		
+		this.codFattura=generateInvoiceCode();
 	}
 	
 	public OrdineBean(int idOrdine,String emailUtente, String stato, LocalDate dataAcquisto, String codFattura) {
@@ -25,6 +26,7 @@ public class OrdineBean implements Serializable {
 		this.stato=stato;
 		this.dataAcquisto=dataAcquisto;
 		this.codFattura=generateInvoiceCode();
+		this.prezzoTotale=0.0;
 	}
 
 	public int getIdOrdine() {
@@ -52,20 +54,21 @@ public class OrdineBean implements Serializable {
 		this.dataAcquisto = dataAcquisto;
 	}
 	
-	public void setCodFattura(String codFattura) {
-		this.codFattura=codFattura;
-	}
 	public String getCodFattura() {
 		return codFattura;
 	}
 	
-	
+	public double getPrezzoTotale() {
+		return prezzoTotale;
+	}
+
+	public void setPrezzoTotale(double prezzoTotale) {
+		this.prezzoTotale = prezzoTotale;
+	}
 
     public static synchronized String generateInvoiceCode() {
         counter++;
         return "INV-" + String.format("%05d", counter); // Genera un codice come INV-00001, INV-00002, etc.
     }
-	
-	
-	
+
 }

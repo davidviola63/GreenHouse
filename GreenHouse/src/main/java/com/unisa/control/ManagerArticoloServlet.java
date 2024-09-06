@@ -23,18 +23,21 @@ public class ManagerArticoloServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     		
     	String action = request.getParameter("action");
+    	String pathOrigin=request.getParameter("pathOrigin");
     	
          try {
              if ("add".equals(action)) {           	 
                  aggiungiArticolo(request, response);
              } else if ("rimuovi".equals(action)) {
                  rimuoviArticolo(request, response);
-             } else if ("mostra".equals(action)) {
-                 mostraArticoli(request, response);
+             } else if ("mostraPerTipologia".equals(action)) {
+                 mostraArticoliPerTipologia(request, response,pathOrigin);
+             }else if ("mostraTutti".equals(action)) {
+            	 mostraArticoli(request, response, pathOrigin);
              }
              else {
             	 request.setAttribute("errorMessage", "Si è verificato un errore durante l'elaborazione della richiesta.");
-                 request.getRequestDispatcher("panelAdmin.jsp").forward(request, response);
+                 request.getRequestDispatcher("error.jsp").forward(request, response);
              }
          } catch (SQLException e) {
              e.printStackTrace();
@@ -47,7 +50,6 @@ public class ManagerArticoloServlet extends HttpServlet {
 
     private void aggiungiArticolo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         
-    	System.out.println(request.getParameter("tipologia"));
     	String tipologia = request.getParameter("tipologia");
         String nome = request.getParameter("nome");
         String descrizione = request.getParameter("descrizione");
@@ -81,17 +83,32 @@ public class ManagerArticoloServlet extends HttpServlet {
             request.getRequestDispatcher("panelAdmin.jsp").forward(request, response); 
         }
     }
-
-    private void mostraArticoli(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    
+    private void mostraArticoli(HttpServletRequest request, HttpServletResponse response, String pathOrigin) throws ServletException, IOException, SQLException {
         // Recupera la lista degli articoli
-    	System.out.println(request.getParameter("tipologia"));
-        List<ArticoloBean> articoli = ManagerArticoloDao.getListOfArticoloByType(request.getParameter("tipologia"));
-
-        // Imposta gli articoli come attributo della request
+    	
+        List<ArticoloBean> articoli = ManagerArticoloDao.getListOfArticolo();
+        
         request.setAttribute("articoli", articoli);
 
         // Inoltra la richiesta alla pagina JSP
-        request.getRequestDispatcher("panelAdmin.jsp").forward(request, response); 
+        request.getRequestDispatcher(pathOrigin).forward(request, response); 
+    }
+
+    private void mostraArticoliPerTipologia(HttpServletRequest request, HttpServletResponse response,String pathOrigin) throws ServletException, IOException, SQLException {
+        // Recupera la lista degli articoli
+    	String tipologia=(String) request.getParameter("tipologia");
+    	if("Tutti".equals(tipologia)) {
+    		mostraArticoli(request, response, pathOrigin);
+    	}else {
+    		List<ArticoloBean> articoli = ManagerArticoloDao.getListOfArticoloByType(tipologia);
+
+        
+    		request.setAttribute("articoli", articoli);
+
+        
+    		request.getRequestDispatcher(pathOrigin).forward(request, response);
+    	}
     }
 }
 

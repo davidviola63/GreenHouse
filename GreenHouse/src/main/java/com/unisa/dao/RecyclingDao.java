@@ -54,18 +54,31 @@ public class RecyclingDao {
 	
 	public static boolean isPossibleToSubmitRequest(String email) throws SQLException {
 		 boolean canSubmit = false;
-	        String query = "SELECT COUNT(*) FROM Mobile_Riciclato WHERE Email_Utente = ?";
-
+	        String queryMobili = "SELECT COUNT(*) FROM Mobile_Riciclato WHERE Email_Utente = ?";
+	        String queryBonus =	"SELECT ID_Bonus FROM Utente WHERE Email = ?";
+	       
 	        try {
+	        	
 	        	con = DatabaseUtil.getConnection();
-	        	ps = con.prepareStatement(query);
+	        	ps = con.prepareStatement(queryMobili);
 	            
+	        	
 	            ps.setString(1, email);	            	      
 	            ResultSet rs = ps.executeQuery();
 
-	            if (rs.next()) {
-	                // Se il risultato è 0, l'utente può sottomettere la richiesta
-	                canSubmit = rs.getInt(1) == 0;
+	            if (rs.next() &&rs.getInt(1)==0) {	          
+	            	
+	            	ps=con.prepareStatement(queryBonus);
+	            	ps.setString(1, email);
+	            	
+	            	rs=ps.executeQuery();
+	            	
+	            	if(rs.next() && rs.getInt(1)==0) {
+	            		
+	            		canSubmit=true;
+	            		
+	            	}
+	            	
 	            }
 	            
 	        }finally {
@@ -186,6 +199,35 @@ public static MobileRiciclatoBean getMobileRiciclato(int id) throws SQLException
           con.close();
         }
     }
+	
+	public static boolean addBonus(int percentuale_sconto,String descrizione) throws SQLException{
+		String query = "INSERT INTO Bonus (percentuale_sconto, descrizione) VALUES (?, ?)";
+    	
+    	try {
+    		
+    		con=DatabaseUtil.getConnection();
+    		ps = con.prepareStatement(query);
+    		   	   		
+            ps.setInt(1, percentuale_sconto);
+            ps.setString(2, descrizione);
+           
+            if (ps.executeUpdate() > 0) {
+            		         
+            		// Commit della transazione se l'inserimento è avvenuto con successo
+            		con.commit();
+            		return true;
+            	
+            } else {
+                // Rollback della transazione se l'inserimento non è riuscito
+                con.rollback();
+                return false;
+            }
+        
+        }finally {
+        	con.close();
+        }	    	
+	
+	}
 }
 	
 	

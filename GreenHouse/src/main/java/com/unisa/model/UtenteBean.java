@@ -29,6 +29,7 @@ public class UtenteBean implements Serializable {
 	        this.citta = citta;
 	        this.via = via;
 	        this.civico = civico;
+	        this.ruolo="Cliente";
 	    }
 
 	    // Getter e setter per ogni attributo

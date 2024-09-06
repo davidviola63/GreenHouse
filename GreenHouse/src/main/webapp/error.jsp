@@ -4,31 +4,28 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Accesso Richiesto</title>
+    <title>ERROR PAGE</title>
 </head>
 <body>
 
-<%
-
-
-	session = request.getSession(false);
-	String username = (session != null) ? (String) session.getAttribute("username") : null;
-	
-    if (username == null) {
-  %>
-  
-          <h2>Devi effettuare il login per accedere a questa pagina. Oppure torna alla Home</h2>
-          <form action="login.jsp" method="get">
-              <button type="submit">Vai alla pagina di Login</button>
-          </form>
-           <form action="greenHouseHome.jsp" method="get">
-              <button type="submit">Torna alla Home</button>
-          </form>
-          
-          
+      <% 
+		String message,errorMessage;
+		
+        errorMessage = (String) request.getAttribute("errorMessage");
+    	message = (String) request.getAttribute("message");    
+		if (errorMessage != null) { 
+   		 %>
+		<p style="color: red;"><%= errorMessage %></p>
+		<% 
+        } 
+        if(message!=null){ %>
+		<p style="color: green;"><%= message %></p>
+		<% 
+   		 }
+		%>
           
   <%
-      } else if(exception != null) {
+      if(exception != null) {
     		  	out.println("Exception: "+exception.getMessage());
     		  	out.println("<br><br>");
     		 	 StackTraceElement[] st = exception.getStackTrace();

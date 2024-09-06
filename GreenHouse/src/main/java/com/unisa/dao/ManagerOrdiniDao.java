@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.unisa.dbconnection.DatabaseUtil;
 import com.unisa.model.OrdineBean;
+import com.unisa.model.ArticoloBean;
 import com.unisa.model.ComponeBean;
 
 public class ManagerOrdiniDao {
@@ -18,29 +19,79 @@ public class ManagerOrdiniDao {
 	private static PreparedStatement ps=null;
 	
 	
-	public static boolean addOrdine(OrdineBean ordine) throws SQLException {
-	    String query = "INSERT INTO Ordine (Email_Utente, stato, data_acquisto, codice_fattura) VALUES (?, ?, ?, ?)";
-
+	public static boolean addOrdine(OrdineBean ordine,List<ArticoloBean> articoli) throws SQLException {
+		
+	    String queryOrdine= "INSERT INTO Ordine (Email_Utente, stato, data_acquisto, codice_fattura) VALUES (?, ?, ?, ?)";
+	    String selectId="SELECT ID FROM Ordine WHERE Email_Utente= ? AND Codice_Fattura = ?";
+	    boolean executed=true;
+	    int idOrdine;
 	    try {
-	        con = DatabaseUtil.getConnection();
-	        ps = con.prepareStatement(query);
+	        con = DatabaseUtil.getConnection();	        
+	        
+	        
+	        /*AGGIUNGO L'ORDINE AL DATABASE*/
+	        ps = con.prepareStatement(queryOrdine);
 
 	        ps.setString(1, ordine.getEmailUtente());
-	        ps.setString(2, ordine.getStato());
+	        ps.setString(2, "In attesa");
 	        ps.setDate(3, Date.valueOf(ordine.getDataAcquisto()));
 	        ps.setString(4, ordine.getCodFattura());
 
-	        if (ps.executeUpdate() > 0) {
-	            con.commit();
-	            return true;
-	        } else {
-	            con.rollback();
-	            return false;
+	        if(ps.executeUpdate()>0) {
+	        	
+	        	con.commit();
+	        	
+	        	ps= con.prepareStatement(selectId);
+	        	ps.setString(1, ordine.getEmailUtente());
+	        	ps.setString(2, ordine.getCodFattura());
+	        	
+	        	ResultSet rs=ps.executeQuery();
+	        	
+	        	if(rs.next()) {
+	        		idOrdine=rs.getInt("ID");
+	        		
+	        		for(ArticoloBean articolo : articoli) {
+		        		
+		        		if(!ManagerOrdiniDao.addComponents(articolo, idOrdine )) {
+		        			System.out.println("Errore generato da ManagerOrdiniDao.addComponents");
+		        			con.rollback();
+		        			executed=false;
+		        			break;
+		        		}
+		        		
+		        		else {
+		        			
+		        			if(!ManagerArticoloDao.reduceQuantityOfArticolo(articolo.getId(), 1)) {
+		        				System.out.println("Errore generato da ManagerArticoloDao.reduceQuantityOfArticolo");
+		        				con.rollback();
+		        				executed=false;
+		        				break;
+		        			}
+		        		}
+		        		
+		        	}//fine ciclo for
+	        		
+	        	}else {
+	        		con.rollback();
+	        	}
+	        	
+	        	
+	        }else {
+	        	con.rollback();
+	        }
+	        
+	        if(executed) {	        	
+	        	con.commit();	        	
+	        }else {
+	        	con.rollback();
 	        }
 
 	    } finally {
 	        con.close();
 	    }
+	    
+	    return executed;
+	    
 	}
 	
 	
@@ -85,7 +136,7 @@ public class ManagerOrdiniDao {
 	            ordine.setEmailUtente(rs.getString("Email_Utente"));
 	            ordine.setStato(rs.getString("stato"));
 	            ordine.setDataAcquisto(rs.getDate("Data_Acquisto").toLocalDate());
-	            ordine.setCodFattura(rs.getString("codice_fattura"));
+
 	        }
 
 	    } finally {
@@ -111,7 +162,7 @@ public class ManagerOrdiniDao {
                 ordine.setEmailUtente(rs.getString("Email_Utente"));
                 ordine.setStato(rs.getString("stato"));
                 ordine.setDataAcquisto(rs.getDate("data_acquisto").toLocalDate()); // Converte java.sql.Date in LocalDate
-                ordine.setCodFattura(rs.getString("Codice_Fattura"));
+                
 
                 ordini.add(ordine);
             }
@@ -130,16 +181,16 @@ public class ManagerOrdiniDao {
 	        try {
 	            con = DatabaseUtil.getConnection();
 	            ps = con.prepareStatement(query);
-	            ps.setString(1, stato);  // Imposta il nuovo stato
-	            ps.setInt(2, id);        // Imposta l'ID dell'ordine da modificare
+	            ps.setString(1, stato); 
+	            ps.setInt(2, id);       
 
 	            int rowsUpdated = ps.executeUpdate();
 	            if (rowsUpdated > 0) {
-	                con.commit();  // Commit della transazione
-	                return true;   // L'aggiornamento è stato eseguito con successo
+	                con.commit();  
+	                return true;  
 	            } else {
-	                con.rollback(); // Rollback della transazione in caso di errore
-	                return false;   // Nessuna riga è stata aggiornata
+	                con.rollback();
+	                return false;  
 	            }
 
 	        } finally {
@@ -156,7 +207,7 @@ public class ManagerOrdiniDao {
 	        try {
 	            con = DatabaseUtil.getConnection();
 	            ps = con.prepareStatement(query);
-	            ps.setInt(1, id); // Imposta l'ID dell'ordine
+	            ps.setInt(1, id);
 
 	            ResultSet rs = ps.executeQuery();
 	            while (rs.next()) {
@@ -188,12 +239,11 @@ public class ManagerOrdiniDao {
 	            ResultSet rs = ps.executeQuery();
 	            while (rs.next()) {
 	                OrdineBean ordine = new OrdineBean();
-	                ordine.setIdOrdine(0);
+	                ordine.setIdOrdine(rs.getInt("ID"));
 	                ordine.setEmailUtente(rs.getString("Email_Utente"));
 	                ordine.setStato(rs.getString("stato"));
-	                ordine.setDataAcquisto(rs.getDate("data_acquisto").toLocalDate());
-	                ordine.setCodFattura(rs.getString("Codice_Fattura"));
-
+	                ordine.setDataAcquisto(rs.getDate("data_acquisto").toLocalDate());	                
+	                ordine.setPrezzoTotale(getPrezzoTotaleOrdine(ordine.getIdOrdine()));
 	                ordini.add(ordine);
 	            }
 	        } finally {
@@ -203,5 +253,100 @@ public class ManagerOrdiniDao {
 	        return ordini;
 	    }
 	
+	public static double getPrezzoTotaleOrdine(int idOrdine) {
+		
+		 double totaleOrdine = 0.0;
+	        
+	        String query = "SELECT SUM(Prezzo_Articolo * Quantita_Selezionata) AS TotaleOrdine " +
+	                       "FROM Compone " +
+	                       "WHERE ID_Ordine = ?";
+
+	        try {
+	        	con = DatabaseUtil.getConnection();
+	            ps = con.prepareStatement(query);
+	            ps.setInt(1, idOrdine);	            
+
+	            try (ResultSet resultSet = ps.executeQuery()) {
+	            
+	                if (resultSet.next()) {
+	                    totaleOrdine = resultSet.getDouble("TotaleOrdine");
+	                }
+	            }
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        return totaleOrdine;
+	 	}
 	
+	public static boolean addComponents(ArticoloBean articolo, int idOrdine) throws SQLException {
+        Connection con = null;
+        PreparedStatement psSelect = null;
+        PreparedStatement psUpdate = null;
+        PreparedStatement psInsert = null;
+
+        try {
+
+            con = DatabaseUtil.getConnection();
+
+            // Verifica se l'articolo esiste già nella tabella `Compone` per quell'ordine
+            
+            String query = "SELECT Quantita_Selezionata FROM Compone WHERE ID_Articolo = ? AND ID_Ordine = ?";
+            psSelect = con.prepareStatement(query);
+            psSelect.setInt(1, articolo.getId());
+            psSelect.setInt(2, idOrdine);
+
+            ResultSet rs = psSelect.executeQuery();
+
+            if (rs.next()) {
+                // Se esiste, aggiorna la quantità
+                int quantitàAttuale= rs.getInt("Quantita_Selezionata");
+                int quantitàAggiornata = quantitàAttuale++;
+
+                query = "UPDATE Compone SET Quantita_Selezionata = ?, Prezzo_Articolo = ? WHERE ID_Articolo = ? AND ID_Ordine = ?";
+                psUpdate = con.prepareStatement(query);
+                psUpdate.setInt(1, quantitàAggiornata);
+                psUpdate.setDouble(2, articolo.getPrezzo());
+                psUpdate.setInt(3, articolo.getId());
+                psUpdate.setInt(4, idOrdine);
+
+                int rowsUpdated = psUpdate.executeUpdate();
+                if (rowsUpdated > 0) {
+	                con.commit();  
+	                return true;  
+	            } else {
+	                con.rollback();
+	                return false;  
+	            }
+                
+            } else {
+            	
+                // Se non esiste, inserisci un nuovo record
+                query = "INSERT INTO Compone (ID_Articolo, ID_Ordine, Prezzo_Articolo, Quantita_Selezionata) VALUES (?, ?, ?, ?)";
+                psInsert = con.prepareStatement(query);
+                psInsert.setInt(1, articolo.getId());
+                psInsert.setInt(2, idOrdine);
+                psInsert.setDouble(3, articolo.getPrezzo());
+                psInsert.setInt(4, 1 );
+
+                int rowsInserted = psInsert.executeUpdate();
+                if (rowsInserted > 0) {
+	                con.commit();  
+	                return true;  
+	            } else {
+	                con.rollback();
+	                return false;  
+	            }
+            }
+
+        } finally {
+        	
+                if (con != null) con.close();
+            
+        }
+
+    }
 }
+	
+

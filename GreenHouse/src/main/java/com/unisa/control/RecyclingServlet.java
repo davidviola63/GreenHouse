@@ -46,7 +46,10 @@ public class RecyclingServlet extends HttpServlet {
 	    	
 	    	getMobiliriciclati(request, response);
 	    	
-		}else {
+		}else if("aggiungiBonus".equals(action)) {
+			addBonus(request,response);
+		}	
+	    else {
 	    	
 	        // Gestisci il caso in cui l'azione non è riconosciuta
 	        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Azione non valida");
@@ -96,7 +99,6 @@ public class RecyclingServlet extends HttpServlet {
 
 	private void setBonusAndDeleteMobileRiciclato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("Flag");
 	    String emailUtente = request.getParameter("emailUtente");
 	    int id = Integer.parseInt(request.getParameter("id"));
 	    int bonus = Integer.parseInt(request.getParameter("bonus"));
@@ -149,5 +151,26 @@ public class RecyclingServlet extends HttpServlet {
 		    request.getRequestDispatcher("panelAdmin.jsp").forward(request, response);
 	}
 	
-	
+	private void addBonus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String message;
+		
+		try {
+			if(RecyclingDao.addBonus(Integer.parseInt(request.getParameter("percentuale")),request.getParameter("descrizione"))) {
+				 message = "Il bonus è stato aggiunto con successo!";
+				 request.setAttribute("message", message);
+				 request.getRequestDispatcher("panelAdmin.jsp").forward(request, response);
+			}
+			else {
+				request.setAttribute("errorMessage", "Errore durante il caricamento");
+                request.getRequestDispatcher("riciclo.jsp").forward(request, response);
+			}
+			
+			
+			
+		}catch (Exception e) {
+	        e.printStackTrace();
+	        request.setAttribute("errorMessage", "Si è verificato un errore durante il recupero dei mobili riciclati.");
+	    }
+	}
 }

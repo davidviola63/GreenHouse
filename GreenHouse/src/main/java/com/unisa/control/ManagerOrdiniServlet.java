@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.unisa.dao.ManagerOrdiniDao;
 import com.unisa.model.ComponeBean;
 import com.unisa.model.OrdineBean;
+import com.unisa.model.UtenteBean;
 
 @WebServlet("/ManagerOrdiniServlet")
 public class ManagerOrdiniServlet extends HttpServlet {
@@ -21,15 +23,19 @@ public class ManagerOrdiniServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         String action = request.getParameter("action");
-        	
+        String pathOrigin= request.getParameter("pathOrigin");
             try {
             	if ("visualizzaOrdini".equals(action)) {
             		mostraOrdini(request,response);           		
             	}else if("visualizzaComponentiOrdine".equals(action)) {
             		mostraComponentiOrdine(request,response);
-            	}else if("modificaStatoOrdine".equals(action));
+            	}else if("modificaStatoOrdine".equals(action)){
             		modificaStatoOrdine(request,response);
-            } catch (SQLException e) {
+            	}else if("visualizzaOrdiniUtente".equals(action)){
+            	
+            		mostraOrdiniOfUtente(request, response,pathOrigin);
+            	}
+            }catch (SQLException e) {
                 e.printStackTrace();
                 request.setAttribute("errorMessage", "Errore durante il recupero degli ordini.");
                 request.getRequestDispatcher("error.jsp").forward(request, response);
@@ -74,6 +80,19 @@ public class ManagerOrdiniServlet extends HttpServlet {
      request.getRequestDispatcher("panelAdmin.jsp").forward(request, response);
          
  	}
+    
+    private void mostraOrdiniOfUtente(HttpServletRequest request, HttpServletResponse response,String pathOrigin) throws ServletException, IOException, SQLException{
+    	
+    	HttpSession sessione=request.getSession(false);
+    	UtenteBean user=(UtenteBean) sessione.getAttribute("User");
+    	
+    	List<OrdineBean> ordiniList = ManagerOrdiniDao.getOrdiniByUtente(user.getEmail());        
+    	
+		request.setAttribute("ordini", ordiniList);               
+		
+		request.getRequestDispatcher(pathOrigin).forward(request, response);
+    	
+    }
     
     
     

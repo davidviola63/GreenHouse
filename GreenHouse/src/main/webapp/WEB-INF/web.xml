@@ -12,7 +12,9 @@
   	</welcome-file-list>
 	
 	
-	
+	<session-config>
+    <session-timeout>30</session-timeout> <!-- Timeout di 30 minuti -->
+	</session-config>
 		
 			<servlet>
     			<servlet-name>LogoutServlet</servlet-name>

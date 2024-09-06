@@ -121,6 +121,43 @@ public class ManagerArticoloDao {
 			
 		}
 	
+	public static List<ArticoloBean> getListOfArticolo() throws SQLException{
+		
+		 String query = "SELECT * FROM articolo ";
+		 List<ArticoloBean> articoli = new ArrayList<ArticoloBean>();
+
+       try{
+       	
+       	con=DatabaseUtil.getConnection();
+   		ps=con.prepareStatement(query);
+                     
+           ResultSet rs = ps.executeQuery();
+           
+           while (rs.next()) {
+           	
+               ArticoloBean articolo = new ArticoloBean();
+               articolo.setId(rs.getInt("ID"));
+               articolo.setTipologia(rs.getString("Tipologia"));
+               articolo.setNome(rs.getString("Nome"));
+               articolo.setDescrizione(rs.getString("Descrizione"));
+               articolo.setPrezzo(rs.getDouble("Prezzo"));
+               articolo.setQuantita(rs.getInt("Quantita_Disponibile"));
+               articolo.setIva(rs.getDouble("IVA"));
+               
+               articolo.setImmagine(GetPictureDao.loadImmagineArticolo(articolo.getId()));
+               
+               articoli.add(articolo);
+           }
+           
+        }finally {
+				con.close();
+
+       }
+       
+       return articoli;
+       
+	}
+	
 	public static List<ArticoloBean> getListOfArticoloByType(String tipologia) throws SQLException{
 		
 		 String query = "SELECT * FROM articolo WHERE Tipologia = ? ";

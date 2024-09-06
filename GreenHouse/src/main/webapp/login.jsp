@@ -24,8 +24,9 @@
 
 	<div class="container_content">
 		<h2>Sei già un nostro amico? Esegui il login:</h2>	
-		<form action="LoginServlet" method="post">
-		
+		<form action="ManagerUserServlet" method="post">
+			
+			<input type="hidden" name="action" value="login"> 
 			<label for="email">Email:</label>
         	<input type="email" id="email" name="email" required><br><br>
 
@@ -33,10 +34,6 @@
         	<input type="password" id="password" name="password" required><br><br>
         	
         	<button type="submit">Accedi</button>
-
-			
-			<!-- Lo script qui sotto fa comparire il messaggio di errore nel form nel caso le credenziali dell'utente non siano valide
-			intercettando l'attributo errorMerssage nella request che verrà aggiornato dalla servlet con la stringa di errore -->
 			
 			<p id="errorMessage" style="color: red;">
         	<% 
@@ -54,8 +51,9 @@
 	<div class="container_content">
 		<h2>Se sei nuovo possiamo conoscerci meglio! Registrati al nostro sito:</h2>	
 		 
-   		 <form id="registrationForm" action="RegistrationServlet" method="post">
-   		 
+   		 <form id="registrationForm" action="ManagerUserServlet" method="post">
+   		 	
+   		 	<input type="hidden" name="action" value="registra"> 
        		<label for="nome">Nome:</label>
         	<input type="text" id="nome" name="nome" required><br><br>
 
