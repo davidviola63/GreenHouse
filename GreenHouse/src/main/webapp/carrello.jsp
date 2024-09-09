@@ -18,6 +18,7 @@
         }
         
     </style>
+    
     <script>
         
         function mostraCheckout() {
@@ -79,7 +80,7 @@ UtenteBean user = (UtenteBean) sessione.getAttribute("User");
                     
                 <form action="ManagerCartServlet" method="get">
                 	<input type="hidden" name="action" value="rimuoviDalCarrello"> 
-                	<input type="text" name="idArticolo" value="<%=articolo.getId() %>">
+                	<input type="hidden" name="idArticolo" value="<%=articolo.getId() %>">
                 	<input type="hidden" name="pathOrigin" value="carrello.jsp">
 					<button type="submit">Rimuovi</button>
 				</form>		
@@ -132,6 +133,16 @@ UtenteBean user = (UtenteBean) sessione.getAttribute("User");
         <label for="cvc">CVC:</label>
         <input type="text" id="cvc" name="cvc" maxlength="4" pattern="\d{3,4}" required><br><br>
         <!-- pattern="\d{3,4}" indica che il campo accetta solo numeri e può essere di 3 o 4 cifre -->
+        
+        <label for="applyBonus">Vuoi applicare bonus?</label><br><br>
+	
+
+		
+        <input type="radio" id="bonus" name="bonus" value="<%=user.getIdBonus() %>" required>
+        <label for="yes">Sì</label>
+
+        <input type="radio" id="bonus" name="bonus" value="<%= 1 %>" required>
+        <label for="no">No</label><br><br>
 
         <button type="submit">Conferma Ordine</button>
     </form>

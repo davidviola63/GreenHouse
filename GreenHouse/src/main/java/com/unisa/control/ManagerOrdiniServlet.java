@@ -31,9 +31,10 @@ public class ManagerOrdiniServlet extends HttpServlet {
             		mostraComponentiOrdine(request,response);
             	}else if("modificaStatoOrdine".equals(action)){
             		modificaStatoOrdine(request,response);
-            	}else if("visualizzaOrdiniUtente".equals(action)){
-            	
+            	}else if("visualizzaOrdiniUtente".equals(action)){           	
             		mostraOrdiniOfUtente(request, response,pathOrigin);
+            	}else if("aggiornaValutazione".equals(action)) {
+            		aggiornaValutazione(request,response);
             	}
             }catch (SQLException e) {
                 e.printStackTrace();
@@ -42,7 +43,24 @@ public class ManagerOrdiniServlet extends HttpServlet {
             }
         }
     
-    private void modificaStatoOrdine(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    private void aggiornaValutazione(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		
+    	int idOrdine= Integer.parseInt(request.getParameter("idOrdine"));
+    	int idArticolo=Integer.parseInt(request.getParameter("idArticolo"));
+    	int valutazione=Integer.parseInt(request.getParameter("valutazione"));
+    	
+    	boolean isUpdated =ManagerOrdiniDao.updateValutazioneComponente(idOrdine,idArticolo,valutazione);
+    	
+    			   if (isUpdated) {
+    	                request.setAttribute("message", "Valutazione inserita con successo.");
+    	        } else {
+    	                request.setAttribute("errorMessage", "Errore durante l'aggiornamento della valutazione dell'articolo.");
+    	        }
+    	        request.getRequestDispatcher("ordini.jsp").forward(request, response);
+		
+	}
+
+	private void modificaStatoOrdine(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
   
     	int idOrdine = Integer.parseInt(request.getParameter("idOrdine"));
         String nuovoStato = request.getParameter("statoOrdine");

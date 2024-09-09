@@ -59,10 +59,12 @@ public class CheckoutServlet extends HttpServlet {
 				OrdineBean ordine=new OrdineBean();
 				ordine.setEmailUtente(request.getParameter("email"));
 				ordine.setDataAcquisto(LocalDate.now());
+				int idBonus=Integer.parseInt(request.getParameter("bonus"));
+				
 				@SuppressWarnings("unchecked")
 	    		List<ArticoloBean> carrello = (List<ArticoloBean>) sessione.getAttribute("carrello");
 				
-				checkoutExecuted=ManagerOrdiniDao.addOrdine(ordine, carrello);
+				checkoutExecuted=ManagerOrdiniDao.addOrdine(ordine, carrello,idBonus);
 				
 				if(checkoutExecuted) {
 					sessione.removeAttribute("carrello");

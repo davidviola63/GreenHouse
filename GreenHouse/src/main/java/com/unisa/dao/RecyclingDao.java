@@ -66,14 +66,14 @@ public class RecyclingDao {
 	            ps.setString(1, email);	            	      
 	            ResultSet rs = ps.executeQuery();
 
-	            if (rs.next() &&rs.getInt(1)==0) {	          
+	            if (rs.next() && rs.getInt(1)==0) {	          
 	            	
 	            	ps=con.prepareStatement(queryBonus);
 	            	ps.setString(1, email);
 	            	
 	            	rs=ps.executeQuery();
 	            	
-	            	if(rs.next() && rs.getInt(1)==0) {
+	            	if(rs.next() && rs.getInt(1)==1) {
 	            		
 	            		canSubmit=true;
 	            		
@@ -148,7 +148,7 @@ public class RecyclingDao {
         return mobiliRiciclati;
     }
 	
-public static MobileRiciclatoBean getMobileRiciclato(int id) throws SQLException {
+	public static MobileRiciclatoBean getMobileRiciclato(int id) throws SQLException {
 		
         String query = "SELECT * FROM Mobile_Riciclato WHERE ID= ? ";       
         ResultSet rs = null;
@@ -227,6 +227,36 @@ public static MobileRiciclatoBean getMobileRiciclato(int id) throws SQLException
         	con.close();
         }	    	
 	
+	}
+
+	/*
+	 * Restituisce la percentuale del bonus. Se la query fallisce allora restituisce 0.
+	 *  L'utente ha come default il bonus con ID=1 ed percentuale sconto=0
+	 */
+	public static int getValueBonus(int idBonus) throws SQLException {
+	    
+	    String query = "SELECT percentuale_sconto FROM Bonus WHERE ID = ?"; 
+	    
+	    int bonusValue=0;
+	 
+	    try {
+	    	
+	    	con=DatabaseUtil.getConnection();
+	    	ps=con.prepareStatement(query);
+	       
+	        ps.setInt(1, idBonus);
+	       
+	       ResultSet rs = ps.executeQuery(); 
+	            
+	            if (rs.next()) {
+	            	bonusValue = rs.getInt("percentuale_sconto");
+	            }	            
+	        
+	    	}finally {
+	    		con.close();
+	    	}
+
+	    return bonusValue; 
 	}
 }
 	

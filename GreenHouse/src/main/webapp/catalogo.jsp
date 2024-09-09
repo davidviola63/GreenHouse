@@ -54,6 +54,7 @@
         	    
         	        for (ArticoloBean articolo : articoli) {
         	        	
+        	        	
       	  %>
 			<li>
 				<strong>ID:</strong> <%= articolo.getId() %><br> 
@@ -69,6 +70,11 @@
                     <input type="hidden" name="idArticolo" value="<%= articolo.getId() %>">
                     <button type="submit">Visualizza</button>
                 </form>
+                <%
+                if(articolo.getQuantita()>0){
+                
+                %>
+                
                 
                 <form action="ManagerCartServlet" method="post" style="display:inline;">
                 	<input type="hidden" name="pathOrigin" value="ManagerArticoloServlet?action=mostraTutti&pathOrigin=catalogo.jsp"> 
@@ -76,17 +82,23 @@
                     <input type="hidden" name="idArticolo" value="<%= articolo.getId() %>">
                     <button type="submit">Aggiungi al Carrello</button>
                 </form>			
-			
-			
-			</li>
+						
 			<% 
-            }
-        } else {
-    %>
+                }else{
+             %>
+                	<strong>PRODOTTO NON DISPONIBILE</strong>
+             <%
+                }
+              %>               
+                </li>              
+              <% 
+        	  }            
+        	} else {
+    		%>
 			<li>Nessun articolo trovato.</li>
 			<% 
-        }
-    %>
+        	}
+    		%>
 		</ul>
 
 	</div>

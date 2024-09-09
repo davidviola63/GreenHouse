@@ -4,6 +4,7 @@
 <%@ page import="com.unisa.model.*"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.unisa.dao.*" %>
+<%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,14 +46,14 @@ if(sessione == null || (user = (UtenteBean) sessione.getAttribute("User")) == nu
         errorMessage = (String) request.getAttribute("errorMessage");
     	message = (String) request.getAttribute("message");    
 		if (errorMessage != null) { 
-    %>
+   		 %>
 		<p style="color: red;"><%= errorMessage %></p>
 		<% 
         } 
         if(message!=null){ %>
 		<p style="color: green;"><%= message %></p>
 		<% 
-    }
+   		 }
 		%>
 
 		<form action="ManagerArticoloServlet" method="post"
@@ -97,7 +98,7 @@ if(sessione == null || (user = (UtenteBean) sessione.getAttribute("User")) == nu
 
 
 	<div>
-		<h1>Mostra tutti gli articoli</h1>
+		<h1>Mostra gli articoli per tipologia:</h1>
 
 		<form action="ManagerArticoloServlet" method="post">
 			
@@ -228,9 +229,10 @@ if(sessione == null || (user = (UtenteBean) sessione.getAttribute("User")) == nu
 				<input type="hidden" name="emailUtente" value="<%= mobile.getEmailUtente() %>"> 
 				<label for="bonus"> Assegna un Bonus:</label> 
 				<select id="bonus" name="bonus" required>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
+					<option value="1">1( 0% )</option>
+					<option value="2">2( 20% )</option>
+					<option value="3">3( 50% )</option>
+					<option value="4">4( 10% )</option>
 				</select>
 
 				<button type="submit">Rimuovi Mobile Riciclato ed Assegna
@@ -260,39 +262,44 @@ if(sessione == null || (user = (UtenteBean) sessione.getAttribute("User")) == nu
 
 		<br>
 
-		<h3>Lista degli Ordini</h3>
-		<%
-        	@SuppressWarnings("unchecked") 
-            List<OrdineBean> ordini = (List<OrdineBean>) request.getAttribute("ordini");
-            if (ordini != null && !ordini.isEmpty()) {
-                for (OrdineBean ordine : ordini) {
-        %>
-		<div>
-			<p>
-				ID Ordine:
-				<%= ordine.getIdOrdine() %></p>
-			<p>
-				Email Utente:
-				<%= ordine.getEmailUtente() %></p>
-			<p>
-				Stato:
-				<%= ordine.getStato() %></p>
-			<p>
-				Data Acquisto:
-				<%= ordine.getDataAcquisto() %></p>
-			<p>
-				Codice Fattura:
-				<%= ordine.getCodFattura() %></p>
-			<hr>
-		</div>
-		<%
-                }
-            } else {
-        %>
-		<p>Nessun ordine trovato.</p>
-		<%
-            }
-        %>
+    <h2>Lista degli Ordini</h2>
+	
+    <% 
+    
+    @SuppressWarnings("unchecked")
+    List<OrdineBean> ordiniList = (List<OrdineBean>) request.getAttribute("ordini");
+    
+    if (ordiniList != null && !ordiniList.isEmpty()) { 
+    	DecimalFormat df = new DecimalFormat("#.00");
+    %>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID Ordine</th>
+                    <th>Data acquisto</th>
+                    <th>Stato</th>
+                    <th>Codice fattura</th>
+                    <th>Totale (€)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (OrdineBean ordine : ordiniList) { %>
+                    <tr>
+                        <td><%= ordine.getIdOrdine() %></td>
+                        <td><%= ordine.getDataAcquisto() %></td>
+                        <td><%= ordine.getStato() %></td>
+                        <td><%= ordine.getCodFattura() %></td>
+                        <!-- Formatta il valore double per visualizzare fino alla seconda cifra decimale -->
+                        <td><%= df.format(ManagerOrdiniDao.getPrezzoTotaleOrdine(ordine.getIdOrdine())) %></td>
+                         
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>Non ci sono ordini disponibili per questo utente.</p>
+    <% } %>
+
 	</div>
 
 
@@ -306,8 +313,8 @@ if(sessione == null || (user = (UtenteBean) sessione.getAttribute("User")) == nu
 
 		<form action="ManagerOrdiniServlet" method="post">
 			<input type="hidden" name="action" value="visualizzaComponentiOrdine">
-			<label for="id">ID Ordine:</label> <input type="number" id="id"
-				name="id" required>
+			<label for="id">ID Ordine:</label> 
+			<input type="number" id="id" name="id" required>
 			<button type="submit">Visualizza Ordine</button>
 		</form>
 
@@ -320,7 +327,7 @@ if(sessione == null || (user = (UtenteBean) sessione.getAttribute("User")) == nu
 		@SuppressWarnings("unchecked") 
     	List<ComponeBean> componenti = (List<ComponeBean>) request.getAttribute("componenti");
 
-    if (ordine != null) {
+   		 if (ordine != null) {
 		%>
 		<div>
 			<p>

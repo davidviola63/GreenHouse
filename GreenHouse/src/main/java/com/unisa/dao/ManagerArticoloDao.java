@@ -58,7 +58,7 @@ public class ManagerArticoloDao {
 	
 	public static boolean deleteArticolo(int id) throws SQLException{
 	
-	String query="DELETE FROM Articolo WHERE id= ?";
+	String query="DELETE FROM Articolo WHERE ID= ?";
 	
 	try {
 		con=DatabaseUtil.getConnection();
@@ -73,8 +73,8 @@ public class ManagerArticoloDao {
     	
 			} else {
      
-    		con.rollback();
-        	return false;
+				con.rollback();
+				return false;
 			}
 		
 		}finally {
@@ -197,9 +197,9 @@ public class ManagerArticoloDao {
 	}
 	
 	
-	public static boolean reduceQuantityOfArticolo(int id, int quantita) throws SQLException {
+	public static boolean reduceQuantityOfArticolo(int id) throws SQLException {
 		
-	    String updateQuery = "UPDATE articolo SET Quantita_Disponibile = Quantita_Disponibile - ? WHERE ID = ?";
+	    String updateQuery = "UPDATE articolo SET Quantita_Disponibile = Quantita_Disponibile - 1 WHERE ID = ?";
 	    String selectQuery = "SELECT Quantita_Disponibile FROM articolo WHERE ID = ?";
 	    
 	    PreparedStatement psUpdate = null;
@@ -218,27 +218,22 @@ public class ManagerArticoloDao {
 
 	        if (rs.next()) {
 	            int quantitaAttuale = rs.getInt("Quantita_Disponibile");
-	            
+	            System.out.println("Quantità attuale reduce quantity: "+ quantitaAttuale);
+	            quantitaAttuale--;
+	            System.out.println("Quantità attuale reduce quantity ridotta: "+ quantitaAttuale);
 	            /*
 	             * Se la quantità  risulterebbe essere negativa annulla la transazione
 	             */
-	            if (quantitaAttuale - quantita < 0) {
+	            if (quantitaAttuale< 0) {
 	                con.rollback();
 	                return false;  
 	            }
 
 	           
 	            psUpdate = con.prepareStatement(updateQuery);
-	            psUpdate.setInt(1, quantita);
-	            psUpdate.setInt(2, id);
-	            psUpdate.executeUpdate();
-
-	            /*
-	             *  Se la quantità arriva esattamente a 0, rimuovi l'articolo
-	             */
-	            if (quantitaAttuale - quantita == 0) {
-	                ManagerArticoloDao.deleteArticolo(id);
-	            }
+	          
+	            psUpdate.setInt(1, id);
+	            psUpdate.executeUpdate();	          
 
 	            con.commit();  
 	            return true;   

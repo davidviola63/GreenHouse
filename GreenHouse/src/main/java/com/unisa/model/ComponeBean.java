@@ -10,6 +10,7 @@ public class ComponeBean implements Serializable {
 	private int idOrdine;
 	private double prezzo;
 	private int quantita;
+	private int valutazione;
 	
 	public ComponeBean() {
 		
@@ -17,6 +18,7 @@ public class ComponeBean implements Serializable {
 		this.setIdOrdine(-1);
 		this.setPrezzo(0);
 		this.setQuantita(0);
+		this.setValutazione(-1);
 		
 	}
 
@@ -50,6 +52,14 @@ public class ComponeBean implements Serializable {
 
 	public void setQuantita(int quantita) {
 		this.quantita = quantita;
+	}
+
+	public int getValutazione() {
+		return valutazione;
+	}
+
+	public void setValutazione(int valutazione) {
+		this.valutazione = valutazione;
 	}
 	
 

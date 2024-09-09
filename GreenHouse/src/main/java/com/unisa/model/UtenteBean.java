@@ -13,7 +13,7 @@ public class UtenteBean implements Serializable {
 	    private String via;
 	    private String civico;
 	    private String ruolo;
-	    private Integer idBonus; // Usa Integer per supportare valori nulli
+	    private int idBonus; 
 
 	    // Costruttore senza argomenti
 	    public UtenteBean() {
@@ -99,11 +99,11 @@ public class UtenteBean implements Serializable {
 	        this.ruolo = ruolo;
 	    }
 
-	    public Integer getIdBonus() {
+	    public int getIdBonus() {
 	        return idBonus;
 	    }
 
-	    public void setIdBonus(Integer idBonus) {
+	    public void setIdBonus(int idBonus) {
 	        this.idBonus = idBonus;
 	    }
 
