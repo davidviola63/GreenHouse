@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.unisa.dao.ManagerUserDao;
+import com.unisa.dao.RecyclingDao;
 import com.unisa.model.UtenteBean;
 import com.unisa.model.ArticoloBean;
 import com.unisa.model.MetodoPagamentoBean;
@@ -33,6 +34,15 @@ public class ManagerUserServlet extends HttpServlet {
 	        		loginUtente(request, response);
 	        	}else if("logout".equals(action)) {
 	        		logoutUtente(request,response);
+	        	}else if("refreshBonus".equals(action)) {
+	        		HttpSession sessione= request.getSession(false);
+	        		
+	        		UtenteBean user=(UtenteBean) sessione.getAttribute("User");
+	        		System.out.println(user.getIdBonus() +"pre cambio");
+	        		user.setIdBonus(RecyclingDao.getIdBonus(user.getEmail()));
+	        		System.out.println(user.getIdBonus() + "post cambio");
+	        		sessione.setAttribute("User", user);
+	        		
 	        	}
 	        }catch(Exception e) {
 	        	e.printStackTrace();

@@ -27,13 +27,17 @@
         
         <img src="GetPictureServlet?id=<%= articolo.getId() %>" alt="Immagine del prodotto">
 
+
+	<%if(articolo.getQuantita()>0){ %>
         <form action="ManagerCartServlet" method="post">
         	<input type="hidden" name="pathOrigin" value="articolo.jsp"> 
             <input type="hidden" name="action" value="aggiungiAlCarrello">
             <input type="hidden" name="idArticolo" value="<%= articolo.getId() %>">
             <button type="submit">Aggiungi al Carrello</button>
         </form>
-
+	<%}else{ %>
+	<p><strong>ARTICOLO NON DISPONIBILE</strong></p>
+	<%} %>
     <%
         } else {
     %>

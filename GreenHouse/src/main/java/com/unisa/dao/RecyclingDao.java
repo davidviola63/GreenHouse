@@ -260,6 +260,32 @@ public class RecyclingDao {
 
 	    return bonusValue; 
 	}
+	
+	public static int getIdBonus(String Email) throws SQLException {
+	    
+	    String query = "SELECT ID_Bonus FROM Utente WHERE Email = ?"; 
+	    int idBonus=0;
+	 
+	    try {
+	    	
+	    	con=DatabaseUtil.getConnection();
+	    	ps=con.prepareStatement(query);
+	       
+	       ps.setString(1, Email);
+	       
+	       ResultSet rs = ps.executeQuery(); 
+	            
+	            if (rs.next()) {
+	            	idBonus = rs.getInt("ID_Bonus");
+	            	System.out.println(idBonus +"valore di recyclingdao");
+	            }	            
+	        
+	    	}finally {
+	    		con.close();
+	    	}
+
+	    return idBonus; 
+	}
 }
 	
 	

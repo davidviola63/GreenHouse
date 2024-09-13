@@ -101,15 +101,14 @@
         <!-- pattern="\d{3,4}" indica che il campo accetta solo numeri e può essere di 3 o 4 cifre -->
         
         <label for="applyBonus">Vuoi applicare bonus?</label><br><br>
-	
 
+		<input type="radio" id="bonusYes" name="bonus" value="<%=user.getIdBonus() %>" required>
+		<label for="bonusYes">Sì</label>
 		
-        <input type="radio" id="bonus" name="bonus" value="<%=user.getIdBonus() %>" required>
-        <label for="yes">Sì</label>
-
-        <input type="radio" id="bonus" name="bonus" value="<%= 1 %>" required>
-        <label for="no">No</label><br><br>
-
+		<input type="radio" id="bonusNo" name="bonus" value="1" required>
+		<label for="bonusNo">No</label><br><br>
+		
+		
         <button type="submit">Conferma Ordine</button>
     </form>
     	 

@@ -26,7 +26,7 @@ public class DatabaseUtil  {
 		String port = "3306";
 		String db = "greenhouse?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		String username = "root";
-		String password = "d.viola2";
+		String password = "google android";
 
 		newConnection = DriverManager.getConnection("jdbc:mysql://"+ ip+":"+ port+"/"+db, username, password);
 

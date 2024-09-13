@@ -53,11 +53,27 @@ if (user == null) {
     user=new UtenteBean();
     user.setNome("Guest");
     user.setRuolo("Cliente");
-    sessione.setAttribute("User", user);
-    
+    sessione.setAttribute("User", user);  
 }
 
 %>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "ManagerUserServlet",
+                method: "GET",
+                data: {
+                	
+                	action : "refreshBonus"
+                	
+                }
+                           
+            });
+        });
+    </script>
 
 <!---------------------------- /*NAVBAR*/ ---------------------------->
 

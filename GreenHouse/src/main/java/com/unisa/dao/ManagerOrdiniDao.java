@@ -376,11 +376,14 @@ public class ManagerOrdiniDao {
                 psInsert.setString(3, articolo.getNome());
                 if(RecyclingDao.getValueBonus(idBonus)==0) {           
                 	psInsert.setDouble(4, articolo.getPrezzo());
+                	System.out.println(idBonus +"addComponents if fallito");
                 }else {
                 	double sconto= articolo.getPrezzo()*RecyclingDao.getValueBonus(idBonus)/100;
                 	double prezzoScontato=articolo.getPrezzo()-sconto;
+                	System.out.println(prezzoScontato +"addcomponentsiffallito");
                 	psInsert.setDouble(4, prezzoScontato);
                 	RecyclingDao.setBonusForUser(ordine.getEmailUtente(), 1);
+                	System.out.println(idBonus +"add component if riuscito");
                 }
                                
                 psInsert.setInt(5, 1 );

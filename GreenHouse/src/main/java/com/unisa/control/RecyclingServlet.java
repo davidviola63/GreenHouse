@@ -107,9 +107,9 @@ public class RecyclingServlet extends HttpServlet {
 	private void setBonusAndDeleteMobileRiciclato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	    String emailUtente = request.getParameter("emailUtente");
-	    int id = Integer.parseInt(request.getParameter("id"));
+	    int idMobile = Integer.parseInt(request.getParameter("idMobile"));
 	    int bonus = Integer.parseInt(request.getParameter("bonus"));
-	    String param;
+	    String param="Exception rilevata.Errore";
 
 	    try {
 	        // Assegna il bonus all'utente
@@ -117,7 +117,7 @@ public class RecyclingServlet extends HttpServlet {
 
 	        if (bonusAssegnato) {
 	            // Rimuovi il mobile riciclato
-	            boolean mobileRimosso = RecyclingDao.deleteMobileRiciclato(id);
+	            boolean mobileRimosso = RecyclingDao.deleteMobileRiciclato(idMobile);
 
 	            if (mobileRimosso) {
 	                param = "Il mobile è stato rimosso e il bonus è stato assegnato con successo!";
@@ -126,9 +126,13 @@ public class RecyclingServlet extends HttpServlet {
 	                
 	            } else {
 	                param = "Errore nella rimozione del mobile. Nessun cambiamento effettuato.";
+	                String encodedParam = URLEncoder.encode(param, "UTF-8");
+	                response.sendRedirect("panelAdmin.jsp?errorMessage="+encodedParam);
 	            }
 	        } else {
 	            param = "Errore nell'assegnazione del bonus.";
+	            String encodedParam = URLEncoder.encode(param, "UTF-8");
+	            response.sendRedirect("panelAdmin.jsp?errorMessage="+encodedParam);
 	        }
 
 	    } catch (Exception e) {
@@ -138,8 +142,7 @@ public class RecyclingServlet extends HttpServlet {
             response.sendRedirect("error.jsp?errorMessage="+encodedParam);
 	    }
 
-	    String encodedParam = URLEncoder.encode(param, "UTF-8");
-        response.sendRedirect("panelAdmin.jsp?errorMessage="+encodedParam);
+	
 	    
 	}
 	
@@ -170,17 +173,25 @@ public class RecyclingServlet extends HttpServlet {
 		                 .append("<p>Commento: ").append(mobile.getCommento()).append("</p>");
 		            
 		         	            
-		            if (mobile.getImmagine() != null && mobile.getImmagine().length > 0) {
+		    			 if (mobile.getImmagine() != null && mobile.getImmagine().length > 0) {
 		        	       
-	        	        html.append("<img src='GetPictureServlet?action=mobileRiciclatoPicture&id=")
-	        	            .append(mobile.getId())
-	        	            .append("' alt='Immagine del mobile' style='width:200px; height:auto;'/>");
-	        	    } else {
-	        	        html.append("<p><em>Nessuna immagine disponibile</em></p>");
-	        	    }
+		            		html.append("<img src='GetPictureServlet?action=mobileRiciclatoPicture&id=")
+	        	        	.append(mobile.getId())
+	        	            	.append("' alt='Immagine del mobile' style='width:200px; height:auto;'/>");
+		            	} else {
+		            		html.append("<p><em>Nessuna immagine disponibile</em></p>");
+	        	    	}
+		    			 
+		    			 html.append("<form action=\"RecyclingServlet\" method=\"post\">")
+		    		      .append("<input type=\"hidden\" name=\"action\" value=\"bonus\"/>")
+		    		      .append("<input type=\"hidden\" name=\"idMobile\" value=\"").append(mobile.getId()).append("\">")
+		    		      .append("<input type=\"hidden\" name=\"emailUtente\" value=\"").append(mobile.getEmailUtente()).append("\">")
+		    		      .append("<input type=\"number\" name=\"bonus\" step=\"1\" required> ")		    		      
+		    		      .append("<input type=\"submit\" value=\"Submit Bonus\"/>")
+		    		      .append("</form>");
 		            
-		            html.append("</div>");
-		        }
+		            	html.append("</div>");
+		    		 }
 		        
 		        html.append("</div>");
 
