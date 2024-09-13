@@ -9,35 +9,10 @@
 <meta charset="UTF-8">
 <title>HEADER</title>
 
+<link rel="stylesheet" href="./css/greenhouse.css">
 <style type="text/css">
 
 
-/*************************************************************************************************************/
-	/* QUI VENGONO RACCOLTE LE CLASSI DELLA NAVBAR*/
-	.navbar{
-		display:flex; /* Piazza tutto su una riga (row)*/
-		background-color:rgb(170, 260, 170);
-		overflow: hidden;
-		border: medium solid white;
-		width:100%;
-		max-width:1200px;
-		
-	}
-	
-	.container_logo{ 
-		display: flex;    
-		margin: 10px;
-		gap: 15px;
-		align-items: center;
-		float:left;
-	}
-		
-	.titolo_logo{
-            font-size: 32px;               /* Dimensione del font */
-            color: #006400;                /* Colore del testo verde scuro */
-	}
-	
-	/*************************************************************************************************************/
 
 </style>
 </head>

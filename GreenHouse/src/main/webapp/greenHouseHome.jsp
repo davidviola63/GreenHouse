@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ page import="com.unisa.model.*" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,30 +9,6 @@
 
 <title>GreenHouse-home</title>
 
-<style>
-	
-	body{
-		background-color:rgb(144, 238, 144); /* colore dello sfondo verde chiaro*/
-		font-family: Georgia, serif; /*font del sito*/
-		margin: 30px 50px;
-	}
-		
-	/*************************************************************************************************************/
-	/* QUI VENGONO RACCOLTE LE CLASSI DEL CONTENT*/
-	
-	.container_content{
-		background-color:white;
-		border: medium solid green;
-		width:auto;
-		height:auto;
-		 /*background-image: url("./images/background_homepage.jpg");*/
-	}
-	
-	.subtitle{		
-		color: red;			
-	}
-
-</style>
 
 </head>
 

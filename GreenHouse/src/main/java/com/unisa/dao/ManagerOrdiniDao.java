@@ -176,7 +176,7 @@ public class ManagerOrdiniDao {
 	            ordine.setEmailUtente(rs.getString("Email_Utente"));
 	            ordine.setStato(rs.getString("stato"));
 	            ordine.setDataAcquisto(rs.getDate("Data_Acquisto").toLocalDate());
-
+	            ordine.setCodFattura(rs.getString("Codice_Fattura"));
 	        }
 
 	    } finally {
@@ -202,7 +202,7 @@ public class ManagerOrdiniDao {
                 ordine.setEmailUtente(rs.getString("Email_Utente"));
                 ordine.setStato(rs.getString("stato"));
                 ordine.setDataAcquisto(rs.getDate("data_acquisto").toLocalDate()); // Converte java.sql.Date in LocalDate
-                
+                ordine.setCodFattura(rs.getString("Codice_Fattura"));
 
                 ordini.add(ordine);
             }
@@ -284,7 +284,8 @@ public class ManagerOrdiniDao {
 	                ordine.setIdOrdine(rs.getInt("ID"));
 	                ordine.setEmailUtente(rs.getString("Email_Utente"));
 	                ordine.setStato(rs.getString("stato"));
-	                ordine.setDataAcquisto(rs.getDate("data_acquisto").toLocalDate());	                
+	                ordine.setDataAcquisto(rs.getDate("data_acquisto").toLocalDate());
+	                ordine.setCodFattura(rs.getString("Codice_Fattura"));
 	                ordine.setPrezzoTotale(getPrezzoTotaleOrdine(ordine.getIdOrdine()));
 	                ordini.add(ordine);
 	            }
@@ -455,11 +456,13 @@ public class ManagerOrdiniDao {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
+            	
                 OrdineBean ordine = new OrdineBean();
                 ordine.setIdOrdine(rs.getInt("ID"));
                 ordine.setEmailUtente(rs.getString("Email_Utente"));
                 ordine.setStato(rs.getString("stato"));
-                ordine.setDataAcquisto(rs.getDate("data_acquisto").toLocalDate());	                
+                ordine.setDataAcquisto(rs.getDate("data_acquisto").toLocalDate());
+                ordine.setCodFattura(rs.getString("Codice_Fattura"));
                 ordine.setPrezzoTotale(getPrezzoTotaleOrdine(ordine.getIdOrdine()));
                 ordini.add(ordine);
             

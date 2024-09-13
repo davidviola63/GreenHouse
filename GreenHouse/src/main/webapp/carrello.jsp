@@ -94,7 +94,15 @@
         <!-- pattern="\d{4}-\d{2}-\d{2}" indica che il campo accetta la data nel formato YYYY-MM-DD -->
         
         <label for="circuito">Circuito:</label>
-        <input type="text" id="circuito" name="circuito" maxlength="50" required><br><br>
+			<select id="circuito" name="circuito" required>
+    			<option value="">-- Seleziona il circuito --</option>
+    			<option value="visa">Visa</option>
+    			<option value="mastercard">Mastercard</option>
+    			<option value="postepay">PostePay</option>
+    			<option value="paypal">PayPal</option>
+    			<option value="altro">Altro</option>
+			</select>
+			<br><br>
         
         <label for="cvc">CVC:</label>
         <input type="text" id="cvc" name="cvc" maxlength="4" pattern="\d{3,4}" required><br><br>

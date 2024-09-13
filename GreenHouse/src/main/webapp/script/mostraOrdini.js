@@ -77,6 +77,24 @@ function getAllOrdiniAdmin() {
 		    });
 		}
 		
+		
+		
+function getOrdiniByUserAdmin() {
+		    var email = $("#email").val();
+		    $.ajax({
+		        url: 'ManagerOrdiniServlet',
+		        type: 'POST',
+		        data: { action: 'visualizzaOrdiniUtente', email: email, cambiaStato: 'true'  },
+		        success: function(response) {
+		            $("#ordiniContainer").html(response);
+					$("#dettagliContainer").html(''); // Resetta i dettagli
+		        },
+		        error: function(error) {
+		            console.error("Errore durante il recupero degli ordini per utente: ", error);
+		        }
+		    });
+		}
+		
 function getOrdiniByDateAdmin() {
 		    var dataInizio = $("#dataInizio").val();
 		    var dataFine = $("#dataFine").val();
