@@ -10,11 +10,7 @@
 <title>HEADER</title>
 
 <link rel="stylesheet" href="./css/greenhouse.css">
-<style type="text/css">
 
-
-
-</style>
 </head>
 <body>
 
@@ -57,9 +53,7 @@ if (user == null) {
 <div class="navbar">
 	<div class="container_logo">
 	
-		<a href="./greenHouseHome.jsp"> <img src="images/logo.jpg" alt="GreenHouseHome" width="60" height="60" > </a>
-		
-		<h2 class="titolo_logo"> GreenHouse </h2>	
+		<a href="./greenHouseHome.jsp"> <img src="images/LogoText.png" alt="GreenHouseHome" width="80" height="80" > </a>	
 	
 		<a href="chisiamo.jsp">Chi siamo</a>
 		

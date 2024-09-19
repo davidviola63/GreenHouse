@@ -7,18 +7,6 @@
 <meta charset="UTF-8">
 <title>Login-GreenHouse</title>
 
-<style>
-	
-	.container_content{
-		background-color:white;
-		border: medium solid green;
-		width:auto;
-		height:auto;
-		background-image: url("./images/background_homepage.jpg");
-	}
-
-</style>
-
 
 </head>
 

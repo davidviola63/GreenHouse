@@ -1,14 +1,11 @@
 @charset "UTF-8";
-
-/*************************************************************************************************************/
-	/* QUI VENGONO RACCOLTE LE CLASSI DELLA NAVBAR*/
+	/* NAVBAR */	
 	.navbar {
-		display:flex; /* Piazza tutto su una riga (row)*/
-		background-color:rgb(170, 260, 170);
+		display: flex; /* Piazza tutto su una riga*/
+		background-color: #2ecc40;
 		overflow: hidden;
-		border: medium solid white;
-		width:100%;
-		max-width:1200px;
+		border: medium solid blue;
+		width: 100%;
 	}
 	
 	.container_logo{ 
@@ -16,34 +13,79 @@
 		margin: 10px;
 		gap: 15px;
 		align-items: center;
-		float:left;
+		float: left;
+	}
+ 
+	body {
+		background-color: rgb(144, 238, 144); /* colore dello sfondo verde chiaro*/
+		font-family: Helvetica;
 	}
 		
-	.titolo_logo{
-            font-size: 32px;               /* Dimensione del font */
-            color: #006400;                /* Colore del testo verde scuro */
-	}
-	
-	/*************************************************************************************************************/
-
-
-		body{
-		background-color:rgb(144, 238, 144); /* colore dello sfondo verde chiaro*/
-		font-family: Georgia, serif; /*font del sito*/
-		margin: 30px 50px;
-	}
-		
-	/*************************************************************************************************************/
-	/* QUI VENGONO RACCOLTE LE CLASSI DEL CONTENT*/
+	/* CONTENT */
 	
 	.container_content{
 		background-color:white;
 		border: medium solid green;
-		width:auto;
-		height:auto;
+		margin: auto;
+		text-align: center;
 		 /*background-image: url("./images/background_homepage.jpg");*/
 	}
 	
-	.subtitle{		
-		color: red;			
+	.subtitle {		
+		color: #8080c0;		
+		text-align: center;	
 	}
+	
+	/* CATALOGO */
+	
+	.catalogo {
+		display: flex; 
+    	margin-bottom: 10px;
+    	padding: 10px;
+    	justify-content: flex-start;
+    	align-items: center; /* Allinea verticalmente al centro */
+    	gap: 35px; /* Distanza tra gli elementi */	
+    	flex-wrap: wrap;	
+	}
+	
+	.articolo {
+		display:flex;
+		padding: 20px 20x 20px 20px;
+	}
+	
+	.articolo-contenuto {
+		padding-left: 20px;
+	}
+	
+	.articolo-immagine {
+    	width: 200px;
+    	height: auto;
+	}
+	
+	.articolo-immagine img{
+	
+	    width: 100%;
+    	height: 100%;
+	}
+	
+	.classForm {
+	    background-color: #2ecc40;
+		border: medium solid green;
+		width:auto;
+		height:auto;
+	}
+	
+	/* ORDINE */
+	.ordine {
+            display: flex; 
+   			border: 1px solid #000;
+    		margin-bottom: 10px;
+    		padding: 10px;
+    		justify-content: space-between; 
+    		align-items: center; 
+    }
+    
+    /* CARRELLO */
+   	.checkoutForm {
+    	display: none;
+   	}  

@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<!-- 
+STRUTTURA HOMEPAGE 
+
+NAVBAR
+1. Breve descrizione del sito e presentazione con singola frase (indirizzamento CHI SIAMO)
+2. Slideshow di 5 prodotti in evidenza
+3. Immagine paesaggio con link al riciclo/Descrizione della funzionalità riciclo
+FOOTER
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,16 +27,14 @@
 
 <%@ include file="header.jsp" %>
 <div id="messageContainer"></div>											
-							
-<h1 align="center">GREEN HOUSE</h1>
-<p>Ciao  <%= user.getNome() %>! Questa è la breve descrizione del sito/ frase ad effetto </p>
+				
 
 
-<div class="container_content">
-	
-	<h2 class="subtitle" align=left > SCOPRI LE NOSTRE OFFERTE!</h2>
-
+<div class="container_content">	
+	<h2 class="subtitle" align=left > Descrizione GreenHouse</h2>
+	<p>Ciao  <%= user.getNome() %>! Questa è la breve descrizione del sito/ frase ad effetto </p>
 </div>
+
 
 
 <%@ include file="footer.jsp" %>

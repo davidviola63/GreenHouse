@@ -2,33 +2,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
     <title>Catalogo</title>
     
-    <style type="text/css">
-		
-		.catalogoContainer{
-			 display: flex; 
-   			 border: 1px solid #000;
-    		 margin-bottom: 10px;
-    		 padding: 10px;
-    		 justify-content: flex-start;
-    		 align-items: center; /* Allinea verticalmente al centro */
-    		  gap: 20px; /* Distanza tra gli elementi */
-		}
-		
-</style>
-
+    
 </head>
+
 <body>
 
 <%@ include file="header.jsp" %>
 	
 	
-    <h1>Catalogo Articoli</h1>
+    <h1 style="text-align: center">Elenco Prodotti</h1>
     
-	<div id="messageContainer"></div> 
+	<div id="messageContainer" class="messageContainer"></div> 
     <!-- Filtri -->
    		<label for="tipologia">Tipologia:</label>
 			 <select id="tipologia" name="tipologia" required>
@@ -41,7 +28,7 @@
 			</select><br><br>
 
 
-    <div id="catalogoContainer" class="catalogoContainer"></div>
+    <div id="catalogoContainer" class="catalogo"></div>
     
     <%@ include file="footer.jsp" %>
     

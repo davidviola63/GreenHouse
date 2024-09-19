@@ -12,23 +12,28 @@
 	
 	<%@include file="header.jsp" %>
 	
+	<div class="articolo">
+	
     <%
         int idArticolo = Integer.parseInt(request.getParameter("idArticolo"));
         ArticoloBean articolo = ManagerArticoloDao.getArticolo(idArticolo);
         
         if (articolo != null) {
     %>
-        <h1><%= articolo.getNome() %></h1>
-        <p><strong>Tipologia:</strong> <%= articolo.getTipologia() %></p>
-        <p><strong>Descrizione:</strong> <%= articolo.getDescrizione() %></p>
-        <p><strong>Prezzo:</strong> €<%= articolo.getPrezzo() %></p>
-        <p><strong>IVA:</strong> <%= articolo.getIva() %>%</p>
-        <p><strong>Quantità Disponibile:</strong> <%= articolo.getQuantita() %></p>
-        
-        <img src="GetPictureServlet?id=<%= articolo.getId() %>" alt="Immagine del prodotto">
-
-
-	<%if(articolo.getQuantita()>0){ %>
+    	
+    	 <div class="articolo-immagine">
+        	<img src="GetPictureServlet?action=articoloPicture&id=<%= articolo.getId() %>" alt="Immagine del prodotto">
+		</div>
+    	
+    	<div class="articolo-contenuto">
+        	<h1><%= articolo.getNome() %></h1>
+        	<p><strong>Tipologia:</strong> <%= articolo.getTipologia() %></p>
+        	<p><strong>Descrizione:</strong> <%= articolo.getDescrizione() %></p>
+        	<p><strong>Prezzo:</strong> €<%= articolo.getPrezzo() %></p>
+        	<p><strong>IVA:</strong> <%= articolo.getIva() %>%</p>
+       	 	<p><strong>Quantità Disponibile:</strong> <%= articolo.getQuantita() %></p>
+       	 	
+       	 		<%if(articolo.getQuantita()>0){ %>
         <form action="ManagerCartServlet" method="post">
         	<input type="hidden" name="pathOrigin" value="articolo.jsp"> 
             <input type="hidden" name="action" value="aggiungiAlCarrello">
@@ -45,6 +50,15 @@
     <%
         }
     %>
+       	 	
+       	 	
+        </div>
+        
+       
+
+
+    
+    </div>
     
     <%@include file="footer.jsp" %>
 

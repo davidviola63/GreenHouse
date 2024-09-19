@@ -6,13 +6,15 @@
 <meta charset="ISO-8859-1">
 <title>Footer</title>
 <style>
+
 .footer{
 		display:flex; /* Piazza tutto su una riga (row)*/
 		background-color:rgb(170, 260, 170);
 		overflow: hidden;
 		border: medium solid white;
 		width:100%;
-		max-width:1200px;			
+		
+			
 	}
 
 </style>

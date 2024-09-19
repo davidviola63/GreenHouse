@@ -8,17 +8,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Carrello</title>
-    
-    
-    <style>       
-        #checkoutForm {
-            display: none;
-        }       
-    </style>
-    
-
-   
+    <title>Carrello</title>   
 </head>
 
 

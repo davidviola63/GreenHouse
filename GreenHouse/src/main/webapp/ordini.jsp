@@ -7,17 +7,6 @@
     <meta charset="UTF-8">
     <title>Gestione Ordini</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-        .ordine {
-            display: flex; 
-   			 border: 1px solid #000;
-    		margin-bottom: 10px;
-    		padding: 10px;
-    		justify-content: space-between; 
-    		align-items: center; 
-        	}
-    </style>
-    
 </head>   
   
 <body>

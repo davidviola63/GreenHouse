@@ -98,21 +98,30 @@ public class ManagerArticoloServlet extends HttpServlet {
         StringBuilder html = new StringBuilder();
         for (ArticoloBean articolo : articoli) {
         	
-        	 html.append("<div class='articolo'>");
-        	 
+        		/* Sono presenti due div: uno per il contenuto e uno per l'immagine  */
+        		html.append("<div class='articolo'>");
+        		  
+        		html.append("<div class='articolo-immagine'>");
+        		   if (articolo.getImmagine() != null && articolo.getImmagine().length > 0) {
+            	       
+           	        html.append("<img src='GetPictureServlet?action=articoloPicture&id=")
+           	            .append(articolo.getId())
+           	            .append("' alt='Immagine dell'articolo'/>");
+           	    } else {
+           	        html.append("<p><em>Nessuna immagine disponibile</em></p>");
+           	    }
+        		html.append("</div>");
+        		   
+        		   
+        		   
+        		//blocco contenuti  
+        		html.append("<div class='articolo-contenuto'>"); 
         	    html.append("<h3>").append(articolo.getNome()).append("</h3>");
         	    html.append("<p><strong>Tipologia:</strong> ").append(articolo.getTipologia()).append("</p>");
         	    html.append("<p><strong>Prezzo:</strong>&euro;").append(String.format("%.2f", articolo.getPrezzo())).append("</p>");
         	    html.append("<p><strong>Quantità:</strong> ").append(articolo.getQuantita()).append("</p>");;
         	    
-        	    if (articolo.getImmagine() != null && articolo.getImmagine().length > 0) {
-        	       
-        	        html.append("<img src='GetPictureServlet?action=articoloPicture&id=")
-        	            .append(articolo.getId())
-        	            .append("' alt='Immagine dell'articolo' style='width:200px; height:auto;'/>");
-        	    } else {
-        	        html.append("<p><em>Nessuna immagine disponibile</em></p>");
-        	    }
+        	 
         	    
         	    if("panelAdmin".equals(pagina)) {
         	    	
@@ -139,6 +148,7 @@ public class ManagerArticoloServlet extends HttpServlet {
         	    .append("<input type=\"hidden\" name=\"idArticolo\" value=\"").append(articolo.getId()).append("\" />")
         	    .append("<button type=\"submit\">Visualizza Articolo</button>")
         	    .append("</form>");
+        	    html.append("</div>");
         	    
         	    html.append("</div>");
         }
@@ -161,21 +171,30 @@ public class ManagerArticoloServlet extends HttpServlet {
         
     		StringBuilder html = new StringBuilder();
             for (ArticoloBean articolo : articoli) {
-            	html.append("<div class='articolo'>");
-           	 
+            	/* Sono presenti due div: uno per il contenuto e uno per l'immagine  */
+        		html.append("<div class='articolo'>");
+        		  
+        		html.append("<div class='articolo-immagine'>");
+        		   if (articolo.getImmagine() != null && articolo.getImmagine().length > 0) {
+            	       
+           	        html.append("<img src='GetPictureServlet?action=articoloPicture&id=")
+           	            .append(articolo.getId())
+           	            .append("' alt='Immagine dell'articolo'>");
+           	    } else {
+           	        html.append("<p><em>Nessuna immagine disponibile</em></p>");
+           	    }
+        		html.append("</div>");
+        		   
+        		   
+        		   
+        		//blocco contenuti  
+        		html.append("<div class='articolo-contenuto'>"); 
         	    html.append("<h3>").append(articolo.getNome()).append("</h3>");
         	    html.append("<p><strong>Tipologia:</strong> ").append(articolo.getTipologia()).append("</p>");
         	    html.append("<p><strong>Prezzo:</strong>&euro;").append(String.format("%.2f", articolo.getPrezzo())).append("</p>");
         	    html.append("<p><strong>Quantità:</strong> ").append(articolo.getQuantita()).append("</p>");;
         	    
-        	    if (articolo.getImmagine() != null && articolo.getImmagine().length > 0) {
-        	       
-        	        html.append("<img src='GetPictureServlet?action=articoloPicture&id=")
-        	            .append(articolo.getId())
-        	            .append("' alt='Immagine dell'articolo' style='width:200px; height:auto;'/>");
-        	    } else {
-        	        html.append("<p><em>Nessuna immagine disponibile</em></p>");
-        	    }
+        	 
         	    
         	    if("panelAdmin".equals(pagina)) {
         	    	
@@ -198,11 +217,11 @@ public class ManagerArticoloServlet extends HttpServlet {
         	    }
         	    
         	    
-        	    
         	    html.append("<form action=\"articolo.jsp\" method=\"GET\">")
         	    .append("<input type=\"hidden\" name=\"idArticolo\" value=\"").append(articolo.getId()).append("\" />")
         	    .append("<button type=\"submit\">Visualizza Articolo</button>")
         	    .append("</form>");
+        	    html.append("</div>");
         	    
         	    html.append("</div>");
             }

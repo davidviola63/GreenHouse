@@ -11,21 +11,6 @@
 <head>
 <meta charset="UTF-8">
 <title>GreenHouse-Pannello di Controllo per Admin</title>
-
-<style type="text/css">
-		
-		.catalogoContainerAdmin{
-			 display: flex; 
-   			 border: 1px solid #000;
-    		 margin-bottom: 10px;
-    		 padding: 10px;
-    		 justify-content: flex-start;
-    		 align-items: center; /* Allinea verticalmente al centro */
-    		  gap: 20px; /* Distanza tra gli elementi */
-		}
-		
-</style>
-
 </head>
 
 
@@ -43,7 +28,7 @@
 
 	<div id="messageContainer"></div>
 	
-	<div>
+	<div class="classForm">
 		<h1>Aggiungi articolo</h1>
 		
 
@@ -121,7 +106,7 @@
 			</select><br><br>
 
 
-    <div class="catalogoContainerAdmin" id="catalogoContainerAdmin"></div>
+    <div class="catalogoContainer" id="catalogoContainerAdmin"></div>
 
     <h2>Visualizza Ordini</h2>
 
