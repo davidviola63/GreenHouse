@@ -161,14 +161,14 @@ public class ManagerArticoloServlet extends HttpServlet {
         	    	//BOTTONE MODIFICA
         	    	html.append("<form action=\"modificaArticolo.jsp\" method=\"GET\">")
        	         	.append("<input type=\"hidden\" name=\"idArticolo\" value=\"").append(articolo.getId()).append("\" />")
-       	         	.append("<button type=\"submit\">Modifica Articolo</button>")
+       	         	.append("<button class=\"buttonCatalog\" type=\"submit\">Modifica Articolo</button>")
        	         	.append("</form>");
        	    	 
         	    	//BOTTONE RIMUOVI
         	    	html.append("<form action=\"ManagerArticoloServlet\" method=\"post\" onsubmit=\"return confermaRimozione();\" >")
         	        .append("<div id=\"messageContainer\"></div>")
         	        .append("<input type=\"hidden\" name=\"idArticolo\" value=\"").append(articolo.getId()).append("\">")
-        	        .append("<button type=\"submit\" name=\"action\" value=\"rimuovi\">Rimuovi Articolo</button>")
+        	        .append("<button class=\"buttonCatalog\" type=\"submit\" name=\"action\" value=\"rimuovi\">Rimuovi Articolo</button>")
         	        .append("</form>");
         	    	
         	    	
@@ -178,7 +178,7 @@ public class ManagerArticoloServlet extends HttpServlet {
         	    		html.append("<form action=\"ManagerCartServlet\" method=\"get\">")
         	    		.append("<input type=\"hidden\" name=\"action\" value=\"aggiungiAlCarrello\">")
         	    		.append("<input type=\"hidden\" name=\"idArticolo\" value=\"").append(articolo.getId()).append("\">")
-        	    		.append("<button type=\"submit\">Aggiungi al carrello</button>")
+        	    		.append("<button class=\"buttonCatalog\" type=\"submit\">Aggiungi al carrello</button>")
         	    		.append("</form>");       	           		
         	    }else {
         	    	 html.append("<p>Articolo non disponibile.</p>");
@@ -188,7 +188,7 @@ public class ManagerArticoloServlet extends HttpServlet {
         	    
         	    html.append("<form action=\"articolo.jsp\" method=\"GET\">")
         	    .append("<input type=\"hidden\" name=\"idArticolo\" value=\"").append(articolo.getId()).append("\" />")
-        	    .append("<button type=\"submit\">Visualizza Articolo</button>")
+        	    .append("<button class=\"buttonCatalog\" type=\"submit\">Visualizza Articolo</button>")
         	    .append("</form>");
         	    html.append("</div>");
         	    
@@ -197,7 +197,7 @@ public class ManagerArticoloServlet extends HttpServlet {
         
         if("panelAdmin".equals(pagina)) {
             html.append("<form action=\"aggiungiArticolo.jsp\" method=\"GET\">")
-            .append("<button type=\"submit\">Aggiungi Articolo</button>")
+            .append("<button class=\"buttonCatalog\" type=\"submit\">Aggiungi Articolo</button>")
             .append("</form>");
         }
 
@@ -243,21 +243,21 @@ public class ManagerArticoloServlet extends HttpServlet {
         	    html.append("<p><strong>Prezzo:</strong>&euro;").append(String.format("%.2f", articolo.getPrezzo())).append("</p>");
         	    html.append("<p><strong>Quantità:</strong> ").append(articolo.getQuantita()).append("</p>");;
         	    
-        	 
+        	    
         	    
         	    if("panelAdmin".equals(pagina)) {
         	    	
         	    	//BOTTONE MODIFICA
         	    	html.append("<form action=\"modificaArticolo.jsp\" method=\"GET\">")
        	         	.append("<input type=\"hidden\" name=\"idArticolo\" value=\"").append(articolo.getId()).append("\" />")
-       	         	.append("<button type=\"submit\">Modifica Articolo</button>")
+       	         	.append("<button class=\"buttonCatalog\" type=\"submit\">Modifica Articolo</button>")
        	         	.append("</form>");
        	    	 
         	    	//BOTTONE RIMUOVI
         	    	html.append("<form action=\"ManagerArticoloServlet\" method=\"post\" onsubmit=\"return confermaRimozione();\" >")
         	        .append("<div id=\"messageContainer\"></div>")
         	        .append("<input type=\"hidden\" name=\"idArticolo\" value=\"").append(articolo.getId()).append("\">")
-        	        .append("<button type=\"submit\" name=\"action\" value=\"rimuovi\">Rimuovi Articolo</button>")
+        	        .append("<button class=\"buttonCatalog\" type=\"submit\" name=\"action\" value=\"rimuovi\">Rimuovi Articolo</button>")
         	        .append("</form>");
         	    	
         	    }
@@ -266,7 +266,7 @@ public class ManagerArticoloServlet extends HttpServlet {
         	    		html.append("<form action=\"ManagerCartServlet\" method=\"get\">")
         	    		.append("<input type=\"hidden\" name=\"action\" value=\"aggiungiAlCarrello\">")
         	    		.append("<input type=\"hidden\" name=\"idArticolo\" value=\"").append(articolo.getId()).append("\">")
-        	    		.append("<button type=\"submit\">Aggiungi al carrello</button>")
+        	    		.append("<button class=\"buttonCatalog\" type=\"submit\">Aggiungi al carrello</button>")
         	    		.append("</form>");       	           		
         	    }else {
         	    	 html.append("<p>Articolo non disponibile.</p>");
@@ -276,7 +276,7 @@ public class ManagerArticoloServlet extends HttpServlet {
         	    
         	    html.append("<form action=\"articolo.jsp\" method=\"GET\">")
         	    .append("<input type=\"hidden\" name=\"idArticolo\" value=\"").append(articolo.getId()).append("\" />")
-        	    .append("<button type=\"submit\">Visualizza Articolo</button>")
+        	    .append("<button class=\"buttonCatalog\" type=\"submit\">Visualizza Articolo</button>")
         	    .append("</form>");
         	    html.append("</div>");
         	    
@@ -285,7 +285,7 @@ public class ManagerArticoloServlet extends HttpServlet {
             
             if("panelAdmin".equals(pagina)) {
 	            html.append("<form action=\"aggiungiArticolo.jsp\" method=\"GET\">")
-	            .append("<button type=\"submit\">Aggiungi Articolo</button>")
+	            .append("<button class=\"buttonCatalog\" type=\"submit\">Aggiungi Articolo</button>")
 	            .append("</form>");
             }
             

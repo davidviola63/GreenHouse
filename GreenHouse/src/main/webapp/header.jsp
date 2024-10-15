@@ -5,13 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<meta charset="UTF-8">
-<title>HEADER</title>
-
-<link rel="stylesheet" href="./css/greenhouse.css">
-
+	<meta charset="UTF-8">
+	<title>Header</title>
+	<link rel="stylesheet" href="./css/greenhouse.css">
 </head>
+
 <body>
 
 <%
@@ -20,7 +18,7 @@ HttpSession sessione = request.getSession(true); // Crea una nuova sessione se n
 
 UtenteBean user = (UtenteBean) sessione.getAttribute("User");
 if (user == null) {
-    // Se l'utente non è loggato, impostiamo lo stato come "guest"; 
+    //Se l'utente non è loggato, impostiamo lo stato come "guest"; 
     user=new UtenteBean();
     user.setNome("Guest");
     user.setRuolo("Cliente");
@@ -37,42 +35,31 @@ if (user == null) {
                 url: "ManagerUserServlet",
                 method: "GET",
                 data: {
-                	
-                	action : "refreshBonus"
-                	
-                }
-                           
-            });
+					action : "refreshBonus"
+				}
+			});
         });
     </script>
 
 <!---------------------------- /*NAVBAR*/ ---------------------------->
-
-
 											
 <div class="navbar">
 	<div class="container_logo">
+		<a href="./greenHouseHome.jsp"> <img src="images/LogoTextWhite.png" alt="GreenHouseHome" width="80" height="80"></a>		
+    </div>	
 	
-		<a href="./greenHouseHome.jsp"> <img src="images/LogoText.png" alt="GreenHouseHome" width="80" height="80" > </a>	
-	
-		<a href="chisiamo.jsp">Chi siamo</a>
-		
-		<a href="catalogo.jsp">Catalogo</a>	
-		
+	<div class="navbar_links">
+		<a href="chisiamo.jsp">Chi siamo</a>		
+		<a href="catalogo.jsp">Catalogo</a>			
 		<a href="./carrello.jsp">Carrello</a>
 			
-		
-		
 		<%
 		if(!user.getNome().equals("Guest")){
 		%>
 		
-		<a href="./ordini.jsp">Ordini</a>
-		
-		<a href="./riciclo.jsp">Riciclo</a>
-		
-		<a href="ManagerUserServlet?action=logout">Logout</a>
-		
+		<a href="./ordini.jsp">Ordini</a>		
+		<a href="./riciclo.jsp">Riciclo</a>		
+		<a href="ManagerUserServlet?action=logout">Logout</a>		
 		<a href="./link_inesistente">Link vuoto</a>
 		
 		
@@ -93,11 +80,7 @@ if (user == null) {
 		<%
 		}
 		%>
-		
-	</div>
+	</div>	
 </div>
-
-
-<!---------------------------- ----------- --------------------------->
 </body>
 </html>

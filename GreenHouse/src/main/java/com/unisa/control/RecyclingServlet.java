@@ -137,9 +137,9 @@ public class RecyclingServlet extends HttpServlet {
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        param = "Exception rilevata!";
+	        param = "Errore nell'assegnazione del bonus Controllare il valore!";
             String encodedParam = URLEncoder.encode(param, "UTF-8");
-            response.sendRedirect("error.jsp?errorMessage="+encodedParam);
+            response.sendRedirect("panelAdmin.jsp?errorMessage="+encodedParam);
 	    }
 
 	

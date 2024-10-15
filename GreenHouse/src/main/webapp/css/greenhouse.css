@@ -1,69 +1,262 @@
 @charset "UTF-8";
-	/* NAVBAR */	
-	.navbar {
-		display: flex; /* Piazza tutto su una riga*/
-		background-color: #2ecc40;
-		overflow: hidden;
-		border: medium solid blue;
-		width: 100%;
+
+	/***** STILE GENERALE *****/
+	
+	body {
+		background-color: white;
+    	font-family: Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #111;
+        line-height: 1.6;
 	}
 	
-	.container_logo{ 
+	h1 {
+		text-align: center;
+		font-size: 40px;
+		letter-spacing: 2px;
+		margin-top: 45px;
+ 		color: #4caf50;
+		text-transform: uppercase;
+    }
+
+    p {
+		/*text-align: center;*/
+		font-size: 20px;
+		margin-top: 10px;
+		color: #333;
+	}
+
+	/***** NAVBAR *****/	
+	
+	.container_logo { 
 		display: flex;    
-		margin: 10px;
-		gap: 15px;
 		align-items: center;
 		float: left;
 	}
- 
-	body {
-		background-color: rgb(144, 238, 144); /* colore dello sfondo verde chiaro*/
-		font-family: Helvetica;
-	}
-		
-	/* CONTENT */
 	
-	.container_content{
-		background-color:white;
-		border: medium solid green;
+	.navbar {
+		display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #2f4f4f;
+        padding: 10px 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+	}
+	
+	nav {
+		background-color: #fff;
+  		padding: 15px 0;
+		border-bottom: 1px solid #ddd;
+		position: sticky;
+		top: 0;
+		z-index: 10;
+    }
+
+    nav ul {
+		list-style: none;
+		padding: 0;
+	 	margin: 0;
+		text-align: center;
+    }
+
+    nav ul li {
+		display: inline;
+		margin: 0 20px;
+    }
+
+    nav ul li a {
+		text-decoration: none;
+		font-size: 16px;
+ 		color: #111;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+    }
+	
+	/* Stile dei link nelle navbar */
+	.navbar a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Effetto Hover sui link */
+    .navbar a:hover {
+        background-color: #006400;
+        color: #fff;
+    }
+
+    /* Stile responsive per la navbar */
+    @media (max-width: 768px) {
+        .navbar {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .navbar a {
+            width: 100%;
+            text-align: left;
+            padding: 15px;
+        }
+    }
+    
+    /* Stile del logo e del titolo */
+    .container_logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .container_logo img {
+        width: 65px;
+        height: 65px;
+    }
+		
+	/* Stile della sezione centrale */
+	.container_content {
+		background-color: white; 
 		margin: auto;
 		text-align: center;
-		 /*background-image: url("./images/background_homepage.jpg");*/
+		/*background-image: url("./images/background_homepage.jpg");*/
 	}
 	
-	.subtitle {		
-		color: #8080c0;		
-		text-align: center;	
+	/***** BARRA DI RICERCA *****/
+	#barraDiRicerca {
+    	width: auto; 
+   		padding: 12px 20px; 
+   		margin: 8px 0; 
+    	box-sizing: border-box;
+    	border: 2px solid #ccc;
+    	border-radius: 4px; 
+    	font-size: 16px; 
+    	transition: border-color 0.3s ease; 
+	}
+
+	#barraDiRicerca:focus {
+    	border-color: #4CAF50; 
+    	outline: none; 
 	}
 	
-	
-	/******* SEZIONE SLIDING IMAGES ***************/
-		
-  /* Slider */
-  
-        .slider {
-            width: 80%;
-            margin: 30px auto;
-            
-        }
+	/***** SEZIONE SLIDER *****/
+  	
+	.slider {
+		width: 75%;
+		margin: 50px auto;
+ 	}
 
-        .slick-slide img {
-            width: 100%;
-            height: 400px;
-            border-radius: 10px;
-          
-        }
+	.slick-slide {
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+	}
 
-        .slick-prev, .slick-next {
-            
-            color: white;
-            border-radius: 50%;
-            
-        }
-		
+	.slick-slide img {
+    	width: 100%;
+    	max-width: 1200px;
+    	height: auto; 
+    	max-height: 600px;
+    	object-fit: cover;
+    	border-radius: 10px;
+	}
+
+	/* Personalizzazione frecce */
+	.slick-prev, .slick-next {
+		width: 40px; 
+    	height: 40px;
+    	background-color: rgba(17, 17, 17, 0.7); 
+    	color: white;
+    	border-radius: 50%; 
+    	display: flex; 
+    	justify-content: center; 
+    	align-items: center;
+   	 	position: absolute; 
+    	top: 50%; 
+    	transform: translateY(-50%); 
+    	z-index: 1; 
+    	transition: background-color 0.3s;
+	}
 	
-	/* CATALOGO */
+	.slick-prev {
+    	left: 10px; /* Distanza dal bordo sinistro */
+	}
+
+	.slick-next {
+    	right: 10px; /* Distanza dal bordo destro */
+	}
 	
+
+	.slick-prev:hover, .slick-next:hover {
+    	background-color: rgba(0, 0, 0, 0.8); 
+	}
+
+
+	.slick-prev:before, .slick-next:before {
+    	font-size: 20px; 
+    	color: white; 
+	}
+
+	.slick-prev:focus, .slick-next:focus {
+    	outline: none;
+	}
+
+	.slick-prev:active, .slick-next:active {
+    	background-color: rgba(17, 17, 17, 0.7); 
+	}
+	
+	/* Personalizzazione pulsanti */
+	.slick-dots li button:before {
+    	color: #111;  
+	}
+	
+	/***** SEZIONE CATEGORIE *****/
+	
+	/* Div Esterno */
+    .categories {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+        margin: 75px auto 50px auto;
+        max-width: 1200px;
+	}
+
+	/* Div singolo elemento */
+    .category {
+    	width: 25%;
+    	height: 300px;
+    	position: relative;
+   		border-radius: 10px;
+   		overflow: hidden;
+  	}
+
+    .category img {
+  		width: 100%;
+  		height: 100%; 
+    	object-fit: cover; 
+		transition: transform 0.3s;
+   	}
+
+	.category:hover img {
+    	transform: scale(1.05);
+	}
+
+	.category h3 {
+ 		position: absolute;
+		bottom: 10px;
+		left: 10px;
+		color: white;
+		font-size: 24px;
+		background-color: rgba(0, 0, 0, 0.6);
+ 		padding: 10px;
+ 		border-radius: 5px;
+ 	}
+	
+	/***** CATALOGO *****/
 	
 	.catalogo {
 		display: flex; 
@@ -75,13 +268,50 @@
     	flex-wrap: wrap;	
 	}
 	
+	/* Menù a tendina */
 	
-	/*******************STILE DELL'ARTICOLO SINGOLO**********************/
+	label {
+    	font-family: Helvetica, sans-serif;
+    	font-size: 30px; 
+    	color: #333; 
+    	margin-right: 10px; 
+    	font-weight: bold;
+    	padding-left: 10px;
+	}
+
+	select {
+    	width: 200px; 
+    	padding: 8px 10px; 
+    	font-family: Helvetica, sans-serif; 
+    	font-size: 16px; 
+    	color: #333;
+    	background-color: #f9f9f9; 
+    	border: 1px solid #ccc; 
+    	border-radius: 5px; 
+	}
+
+	select:focus {
+    	outline: none; 
+    	border-color: #006400; 
+    	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+	}
+
+	select option:hover {
+    	background-color: #006400; 
+    	color: #333; 
+	}
+
+	option {
+    	font-family: Helvetica, sans-serif;
+    	font-size: 16px; 
+	}
 	
+	
+	
+	/***** VISUALIZZAZIONE ARTICOLO SINGOLO *****/
 	
 	.articolo-singolo {
-	
-		display:flex;
+		display: flex;
 		padding: 20px;
 		width: 80%;
 		height:auto;	
@@ -99,19 +329,19 @@
 	}
 	
 	.articolo-singolo-immagine img{
-	
-	    width: 100%;
+		width: 100%;
     	height: 100%;
     	border-radius: 10px; /* Arrotonda gli angoli */
 	}
 	
 	
-	/*******************STILE DELL'ARTICOLO NEL CATALOGO**********************/
+	/***** VISUALIZZAZIONE ARTICOLO NEL CATALOGO *****/
+	
 	.articolo {
-		display:flex;
+		display: flex;
 		padding: 20px 20x 20px 20px;
 		width: 350px;
-    	height: 220px;
+    	height: 350px;
 	}
 	
 	.articolo-contenuto {
@@ -120,22 +350,20 @@
 		
 	}
 	
-
-	
 	.articolo-immagine {
     	width: 60%;
     	height: 100%;
 	}
 	
 	.articolo-immagine img{
-	
-	    width: 100%;
+		width: 100%;
     	height: 100%;
     	border-radius: 10px; /* Arrotonda gli angoli */
+    	object-fit: cover;
 	}
 	
 	
-		@media (max-width: 600px) {
+	@media (max-width: 600px) {
     .articolo-contenuto {
         font-size: 10px; /* Riduci la dimensione del testo su schermi più piccoli */
     }
@@ -147,20 +375,7 @@
     }
 }
 	
-	
-	/***********************************************************************/
-	
-	.classForm {
-	    background-color: #2ecc40;
-		border: medium solid green;
-		width:auto;
-		height:auto;
-	}
-	
-	
 	/* LOGIN */
-	
-	
 	
 	.loginForm{
 		display:block;
@@ -174,20 +389,177 @@
 		display:block
 	}
 	
-	
-	
-	
 	/* ORDINE */
 	.ordine {
-            display: flex; 
-   			border: 1px solid #000;
-    		margin-bottom: 10px;
-    		padding: 10px;
-    		justify-content: space-between; 
-    		align-items: center; 
+    	display: flex; 
+   		border: 1px solid #000;
+    	margin-bottom: 10px;
+    	padding: 10px;
+    	justify-content: space-between; 
+    	align-items: center; 
     }
     
     /* CARRELLO */
-   	.checkoutForm {
-    	display: none;
-   	}  
+    
+	/* Stile per il contenitore degli articoli nel carrello */
+    .cart-items {
+    	max-width: 900px;
+    	margin: 0 auto;
+    	padding: 0 10px;
+     }
+
+    /* Stile per gli articoli nel carrello */
+    .cart-item {
+     	background-color: #ffffff;
+     	border: 1px solid #ddd;
+     	border-radius: 8px;
+       	padding: 20px;
+       	margin-bottom: 15px;
+       	display: flex;
+     	align-items: center;
+       	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+       	transition: transform 0.2s;
+   	}
+
+    .cart-item:hover {
+    	transform: scale(1.02);
+    }
+
+    .cart-item img {
+    	max-width: 100px;
+    	margin-right: 15px;
+  		border-radius: 8px;
+    }
+
+	.cart-item-content {
+    	flex: 1;
+    }
+
+    .cart-item strong {
+    	margin-bottom: 5px;
+    	font-size: 18px;
+    	color: #333;
+    }
+
+    /* Stile per i bottoni */
+  	button {
+ 		background-color: #388e3c; 
+   	 	color: white;
+      	padding: 12px 20px;
+     	border: none;
+     	border-radius: 6px;
+     	font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+        margin-bottom: 10px;
+   }
+   
+    	.buttonCatalog {
+ 		background-color: #388e3c; 
+   	 	color: white;
+      	/*padding: 12px 20px;*/
+     	border: none;
+     	border-radius: 6px;
+     	font-size: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 4px;
+        margin-bottom: 4px;
+   }
+
+ 	button:hover {
+   		background-color: #2c6c2f; 
+  	}
+
+    /* Stile per il modulo di checkout */ 
+   	.checkout-form {
+   		background-color: #ffffff;
+       	border: 1px solid #ddd;
+      	border-radius: 8px;
+       	padding: 20px;
+       	margin-top: 30px;
+       	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+       	max-width: 600px;
+       	margin: 30px auto;
+        display: none; /* Nascosto di default */
+   }
+
+  	.checkout-form h2 {
+   		margin-bottom: 15px;
+    	color: #4caf50; /* Verde più fresco */
+   	}
+
+ 	.checkout-form label {
+     	display: block;
+      	margin-bottom: 5px;
+      	color: #333;
+    }
+
+	.checkout-form input[type="text"], .checkout-form select {
+		width: 100%;
+    	padding: 12px;
+    	border: 1px solid #ddd;
+    	border-radius: 6px;
+      	font-size: 16px;
+      	margin-bottom: 15px;
+  	}
+
+	.checkout-form input[type="radio"] {
+     	margin-right: 5px;
+   	}
+
+	.checkout-form .radio-group {
+        margin-bottom: 15px;
+   	}
+
+	.checkout-form button {
+   		background-color: #388e3c;
+    	color: white;
+       	padding: 12px 20px;
+       	border: none;
+    	border-radius: 6px;
+      	font-size: 18px;
+    	cursor: pointer;
+      	transition: background-color 0.3s ease;
+      	width: 100%;
+     }
+
+	.checkout-form button:hover {
+   		background-color: #2c6c2f;
+    }
+    
+    .empty-cart {
+    	text-align: center;
+    	font-size: 18px;
+      	color: #dc3545; 
+   	}
+
+    .checkout-msg {
+    	font-size: 18px;
+      	margin-top: 20px;
+      	text-align: center;
+    }
+        
+ 	.checkout-button {
+  		display: block;
+   		max-width: 200px;
+     	margin: 30px auto;
+    	background-color: #388e3c; 
+      	color: white;
+     	padding: 15px 25px;
+ 		border: none;
+  		border-radius: 8px;
+   		font-size: 18px;
+  		cursor: pointer;
+		text-align: center;
+ 		transition: background-color 0.3s ease, transform 0.3s ease;
+   }
+
+   .checkout-button:hover {
+   		background-color: #2c6c2f; 
+     	transform: scale(1.05);
+  	}
+  	
+  	/* Login */
+  	
