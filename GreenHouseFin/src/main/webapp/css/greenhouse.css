@@ -1,0 +1,797 @@
+@charset "UTF-8";
+
+/***** STILE GENERALE *****/
+	
+body {
+	background-color: white;
+    font-family: Helvetica, sans-serif;
+   	margin: 0;
+    padding: 0;
+    color: #111;
+   	line-height: 1.6;
+}
+	
+h1 {
+	text-align: center;
+	font-size: 40px;
+	font-style: italic;
+	letter-spacing: 2px;
+	margin-top: 45px;
+ 	color: #4caf50;
+	text-transform: uppercase;
+}
+
+p {
+	font-size: 20px;
+	margin-top: 10px;
+	color: #333;
+}
+
+
+
+/***** NAVBAR *****/	
+	
+.container_logo { 
+	display: flex;    
+	align-items: center;
+	float: left;
+}
+	
+.navbar {
+	display: flex;
+  	align-items: center;
+  	justify-content: space-between;
+ 	background-color: #2f4f4f;
+  	padding: 10px 20px;
+   	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   	position: sticky;
+    top: 0;
+    z-index: 100;
+}
+	
+nav {
+	background-color: #fff;
+  	padding: 15px 0;
+	border-bottom: 1px solid #ddd;
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}
+
+nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+}
+
+nav ul li {
+	display: inline;
+	margin: 0 20px;
+}
+
+nav ul li a {
+	text-decoration: none;
+	font-size: 16px;
+ 	color: #111;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+	
+/* Stile dei link nelle navbar */
+.navbar a {
+  	color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Effetto Hover sui link */
+.navbar a:hover {
+    background-color: #006400;
+    color: #fff;
+}
+
+/* Stile responsive per la navbar */
+@media (max-width: 768px) {
+	.navbar {
+  		flex-direction: column;
+ 		align-items: flex-start;
+	}
+
+	.navbar a {
+		width: 100%;
+		text-align: left;
+		padding: 15px;
+    }
+}
+    
+/* Stile del logo e del titolo */
+.container_logo {
+	display: flex;
+	align-items: center;
+ 	gap: 15px;
+}
+
+.container_logo img {
+	width: 65px;
+   	height: 65px;
+}
+		
+/* Stile della sezione centrale */
+.container_content {
+	background-color: white; 
+	margin: auto;
+	text-align: center;
+	/*background-image: url("./images/background_homepage.jpg");*/
+}
+	
+/***** BARRA DI RICERCA *****/
+#barraDiRicerca {
+	width: auto; 
+	padding: 12px 20px; 
+	margin: 8px 0; 
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px; 
+	font-size: 16px; 
+	transition: border-color 0.3s ease; 
+}
+
+#barraDiRicerca:focus {
+	border-color: #4CAF50; 
+	outline: none; 
+}
+	
+/***** SEZIONE SLIDER *****/
+  	
+.slider {
+	max-width:1200px;
+	height:500px;
+	width: 50%;
+	justify-content: center;
+	margin: 50px auto;
+}
+
+.slick-slide {
+	width:100%;
+	height: 500px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.slick-slide img {
+	width: 100%;
+	max-width: 1000px;
+	height: 100%; 
+	max-height: 600px;
+	object-fit: cover;
+	border-radius: 10px;
+}
+
+/* Personalizzazione frecce */
+.slick-prev, .slick-next {
+	width: 40px; 
+	height: 40px;
+	background-color: rgba(17, 17, 17, 0.7); 
+	color: white;
+	border-radius: 50%; 
+	display: flex; 
+	justify-content: center; 
+	align-items: center;
+	position: absolute; 
+	top: 50%; 
+	transform: translateY(-50%); 
+	z-index: 1; 
+   	transition: background-color 0.3s;
+}
+	
+.slick-prev {
+	left: 10px; /* Distanza dal bordo sinistro */
+}
+
+.slick-next {
+	right: 10px; /* Distanza dal bordo destro */
+}
+	
+.slick-prev:hover, .slick-next:hover {
+	background-color: rgba(0, 0, 0, 0.8); 
+}
+
+.slick-prev:before, .slick-next:before {
+	font-size: 20px; 
+	color: white; 
+}
+
+.slick-prev:focus, .slick-next:focus {
+	outline: none;
+}
+
+.slick-prev:active, .slick-next:active {
+	background-color: rgba(17, 17, 17, 0.7); 
+}
+	
+/* Personalizzazione pulsanti */
+.slick-dots li button:before {
+	color: #111;  
+}
+	
+/***** SEZIONE CATEGORIE *****/
+	
+/* Div Esterno */
+.categories {
+	display: flex;
+	justify-content: space-between;
+	gap: 30px;
+ 	margin: 75px auto 50px auto;
+	max-width: 1200px;
+}
+
+/* Div singolo elemento */
+.category {
+	width: 25%;
+	height: 300px;
+	position: relative;
+	border-radius: 10px;
+ 	overflow: hidden;
+}
+
+.category img {
+	width: 100%;
+	height: 100%; 
+	object-fit: cover; 
+	transition: transform 0.3s;
+}
+
+.category:hover img {
+	transform: scale(1.05);
+}
+
+.category h3 {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	color: white;
+	font-size: 24px;
+	background-color: rgba(0, 0, 0, 0.6);
+	padding: 10px;
+	border-radius: 5px;
+}
+	
+/***** CATALOGO *****/
+	
+.catalogo {
+	display: flex; 
+	margin-bottom: 10px;
+	padding: 10px;
+	justify-content: flex-start;
+	align-items: center; 
+	gap: 35px;
+	flex-wrap: wrap;	
+}
+	
+/* Menù a tendina */	
+label {
+	font-family: Helvetica, sans-serif;
+	font-size: 30px; 
+	color: #333; 
+	margin-right: 10px; 
+	font-weight: bold;
+	padding-left: 10px;
+}
+
+select {
+	width: 200px; 
+	padding: 8px 10px; 
+	font-family: Helvetica, sans-serif; 
+	font-size: 16px; 
+	color: #333;
+	background-color: #f9f9f9; 
+	border: 1px solid #ccc; 
+  	border-radius: 5px; 
+}
+
+select:focus {
+	outline: none; 
+	border-color: #006400; 
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+}
+
+select option:hover {
+	background-color: #006400; 
+	color: #333; 
+}
+
+option {
+	font-family: Helvetica, sans-serif;
+	font-size: 16px; 
+}
+	
+/***** VISUALIZZAZIONE ARTICOLO SINGOLO *****/
+	
+.articolo-singolo {
+	display: flex;
+	padding: 20px;
+	width: 80%;
+	height:auto;	
+}
+
+.articolo-singolo-contenuto {
+	width: 40%;
+	padding-left:20px;
+}
+	
+.articolo-singolo-immagine {
+	width: 100%;
+	height: 100%;
+}
+	
+.articolo-singolo-immagine img{
+	width: 100%;
+	height: 100%;
+	border-radius: 10px; 
+}
+	
+/***** VISUALIZZAZIONE ARTICOLI NEL CATALOGO *****/
+	
+.articolo {
+	display: flex;
+	padding: 20px, 20px, 20px, 20;
+	width: 345px;
+	height: 600px; 
+	flex-direction: column;
+	justify-content: space-between; 
+	box-sizing: border-box; 
+    overflow: hidden; 
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    margin-bottom: 20px;
+}
+	
+.articolo-contenuto {
+	padding-left: 20px;
+	flex-grow: 1;
+    flex-direction: column;
+}
+
+.articolo-contenuto p {
+	font-size: 16px; /* Dimensione ridotta per i paragrafi della descrizione degli articoli */
+}
+	
+.articolo-immagine {
+	width: 100%;
+	height: 100%; 
+}
+	
+.articolo-immagine img{
+	height: 300px;
+	width: 450px;
+	border-radius: 10px; 
+	object-fit: cover;
+}
+
+.buttonCatalog {
+	background-color: #388e3c; 
+	color: white;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 6px;
+	font-size: 14px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+	
+/***** LOGIN *****/
+	
+.loginForm {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out; 
+}
+
+.registrationForm {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; 
+}
+
+.registrationForm.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Stile di base per input di tipo text, email, password, ecc. */
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], 
+input[type="tel"], input[type="url"], input[type="search"], textarea {
+    padding: 12px 15px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    color: #333;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:hover, textarea:hover {
+    border-color: #007bff;
+    background-color: #fff;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    background-color: #fff;
+}
+
+textarea {
+    min-height: 150px;
+    min-width: 350px;
+    resize: vertical;
+}
+
+input:disabled, textarea:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    border-color: #ced4da;
+    cursor: not-allowed;
+}
+
+/* Stile di base per le date */
+input[type="date"], input[type="datetime-local"], input[type="month"],
+input[type="week"], input[type="time"] {
+    padding: 12px 15px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    color: #333;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    appearance: none; 
+    -webkit-appearance: none; 
+}
+
+input[type="date"]::placeholder, input[type="datetime-local"]::placeholder, input[type="month"]::placeholder,
+input[type="week"]::placeholder, input[type="time"]::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+input[type="date"]:hover, input[type="datetime-local"]:hover, input[type="month"]:hover,
+input[type="week"]:hover, input[type="time"]:hover {
+    border-color: #007bff;
+    background-color: #fff;
+}
+
+input[type="date"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus,
+input[type="week"]:focus, input[type="time"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    background-color: #fff;
+}
+
+input[type="date"]:disabled, input[type="datetime-local"]:disabled, input[type="month"]:disabled,
+input[type="week"]:disabled, input[type="time"]:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    border-color: #ced4da;
+    cursor: not-allowed;
+}
+
+/***** ORDINE *****/
+
+.ordine {
+	display: flex; 
+	border: 1px solid #000;
+	margin-bottom: 10px;
+	padding: 10px;
+	justify-content: space-between; 
+	align-items: center; 
+}
+
+
+@media (max-width: 768px) {
+  .ordine {
+    flex-direction: column; /* Dispone gli elementi in una colonna */
+    align-items: flex-start; /* Allinea gli elementi a sinistra */
+  }
+}
+
+
+@media (max-width: 480px) {
+  .ordine {
+    padding: 5px; /* Riduce il padding per schermi più piccoli */
+  }
+}
+    
+/***** CARRELLO *****/
+    
+/* Stile per il contenitore degli articoli  presenti nel carrello */
+.cart-items {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 0 10px;
+}
+
+/* Stile per gli articoli presenti nel carrello */
+.cart-item {
+	background-color: #ffffff;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 20px;
+	margin-bottom: 15px;
+	display: flex;
+	align-items: center;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s;
+}
+
+.cart-item:hover {
+	transform: scale(1.02);
+}
+
+.cart-item img {
+	max-width: 100px;
+	margin-right: 15px;
+	border-radius: 8px;
+}
+
+.cart-item-content {
+	flex: 1;
+}
+
+.cart-item strong {
+	margin-bottom: 5px;
+	font-size: 18px;
+	color: #333;
+}
+
+/* Stile per i bottoni */
+button {
+	background-color: #388e3c; 
+	color: white;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 6px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+button:hover {
+	background-color: #2c6c2f; 
+}
+
+/* Stile per il modulo di checkout */ 
+.checkout-form {
+	background-color: #ffffff;
+	border: 1px solid #ddd;
+ 	border-radius: 8px;
+ 	padding: 20px;
+	margin-top: 30px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	max-width: 600px;
+	margin: 30px auto;
+	display: none; 
+}
+
+.checkout-form h2 {
+	margin-bottom: 15px;
+ 	color: #4caf50; 
+}
+
+.checkout-form label {
+ 	display: block;
+	margin-bottom: 5px;
+	color: #333;
+}
+
+.checkout-form input[type="text"], .checkout-form select {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	font-size: 16px;
+ 	margin-bottom: 15px;
+}
+
+.checkout-form input[type="radio"] {
+	margin-right: 5px;
+}
+
+.checkout-form .radio-group {
+	display: flex;
+	margin-bottom: 15px;
+}
+
+.checkout-form button {
+	background-color: #388e3c;
+	color: white;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 6px;
+	font-size: 18px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	width: 100%;
+}
+
+.checkout-form button:hover {
+	background-color: #2c6c2f;
+}
+    
+.empty-cart {
+	text-align: center;
+	font-size: 18px;
+	color: #dc3545; 
+}
+
+.checkout-msg {
+	font-size: 18px;
+	margin-top: 20px;
+	text-align: center;
+}
+        
+.checkout-button {
+	display: block;
+	max-width: 200px;
+	margin: 30px auto;
+	background-color: #388e3c; 
+	color: white;
+	padding: 15px 25px;
+	border: none;
+	border-radius: 8px;
+	font-size: 18px;
+	cursor: pointer;
+	text-align: center;
+	transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.checkout-button:hover {
+	background-color: #2c6c2f; 
+	transform: scale(1.05);
+}
+
+
+/*FOOTER*/
+        /* Stile generale del footer */
+        .footer {
+            display: flex; 
+            justify-content: space-between;
+            background-color: #2f4f4f; 
+            padding: 20px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            color: #fff;
+            max-width: auto; 
+            margin: auto;
+        }
+
+        .footer div {
+            flex: 1;
+            padding: 10px; 
+        }
+
+        /* Stile per i titoli delle sezioni */
+        .footer h3 {
+            font-size: 20px; 
+            color: #fff; 
+            margin-bottom: 15px; 
+            font-weight: bold;
+            letter-spacing: 1px; 
+        }
+
+        /* Stile degli elenchi nelle sezioni */
+        .footer ul {
+            list-style: none; 
+            padding: 0; 
+        }
+
+        /* Stile dei link */
+        .footer a {
+            color: #fff; 
+            text-decoration: none; 
+            display: block; 
+            margin-bottom: 10px; 
+            font-size: 16px; 
+            transition: color 0.3s ease; /* Transizione morbida per il cambio di colore */
+        }
+
+        /* Effetto hover sui link del footer */
+        .footer a:hover {
+            color: #00b300; 
+        }
+
+        /* Stile responsive per il footer su dispositivi mobile */
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column; 
+                text-align: center;
+            }
+
+            .footer div {
+                margin-bottom: 20px; 
+            }
+        }
+
+        /* Stile della sezione copyright */
+        .copyright {
+            text-align: center; 
+            padding: 10px; 
+            background-color: #1f1f1f; 
+            color: #fff; 
+            font-size: 14px; 
+            border-top: 1px solid #006400; 
+        }
+
+        /* Stile extra per enfatizzare i titoli delle sezioni */
+        .footer h3::after {
+            content: ''; /* Crea una linea decorativa sotto il titolo */
+            display: block;
+            width: 50px; 
+            height: 2px; 
+            background-color: #00b300; 
+            margin-top: 5px; 
+        }
+
+        /* Sezione social e pagamenti */
+        .footer-logos {
+            display: flex; 
+            justify-content: center; 
+            margin-top: 20px; 
+        }
+
+        /* Stile per i loghi social */
+        .social-logos img {
+            width: 30px; 
+            height: 30px; 
+            margin-right: 15px; 
+            transition: transform 0.3s ease; 
+        }
+        
+        .payment-logos img {
+        	width: 42px; 
+            height: 42px; 
+            margin-right: 15px; 
+            transition: transform 0.3s ease; 
+        }
+
+        /* Effetto hover sui loghi */
+        .social-logos img:hover, .payment-logos img:hover {
+            transform: scale(1.1); /* Ingrandisce leggermente il logo al passaggio del mouse */
+        }
+        
+.suggestions-box {
+   
+    background-color: white; /* Sfondo bianco */
+    position: relative; /* Posizionamento libero */ 
+    width: 200px; /* Larghezza uguale al campo di ricerca */
+    max-height: 200px; /* Altezza massima */
+    overflow-y: auto; /* Aggiungi la barra di scorrimento verticale se necessario */
+    box-shadow: 0 4px 15px rgba(0, 0, 139, 0.2); /* Ombra per effetto 3D */
+    left: 50%; /* Posiziona a metà della barra di ricerca */
+    margin-left: -100px; /* Sposta a sinistra della metà della larghezza del menu */
+}
+
+.suggestion-item {
+    padding: 10px; /* Padding interno */
+    cursor: pointer; /* Cambia il cursore quando si passa sopra */
+}
+
+.suggestion-item:hover {
+    background-color: rgba(0,64,0,0.4); /* Colore di sfondo al passaggio del mouse */
+}
+
